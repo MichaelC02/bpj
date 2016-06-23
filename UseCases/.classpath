@@ -11,5 +11,10 @@
 			<accessrule kind="accessible" pattern="javafx/**/**"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.39-bin.jar">
+		<accessrules>
+			<accessrule kind="accessible" pattern="java/sql/**"/>
+		</accessrules>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
