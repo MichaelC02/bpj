@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.UC1_LoginController">
+   <center>
+      <Pane prefHeight="332.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button defaultButton="true" layoutX="156.0" layoutY="203.0" mnemonicParsing="false" onAction="#clickLogin" text="Login" />
+            <TextField layoutX="102.0" layoutY="103.0" />
+            <TextField layoutX="102.0" layoutY="133.0" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
