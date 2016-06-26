@@ -34,9 +34,51 @@ class DBConnect
 	
 	
 	//Matteo neu
-	static Boolean neworder( String name2 )
+	static Boolean neworder( String name )
 	{
-		return true;
+		try
+		{
+			conn = getConnection();
+			
+			int id;
+			String id_str;
+			id_str = "1234567890";
+			// MD5 generieren START
+		/*	MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes("UTF-8"));
+
+			byte byteData[] = md.digest();
+		    StringBuffer sb = new StringBuffer();
+		    for (int i = 0; i < byteData.length; i++)
+		        sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+
+		    String md5password = sb.toString();*/
+		    // MD5 generieren ENDE
+		    
+			
+			PreparedStatement ps = conn.prepareStatement("Insert Into order Set order_id = ? and name = ?");
+			ps.setString(1, id_str);
+			ps.setString(2, name);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			return rs.getInt(1) == 1;
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	/*	catch (NoSuchAlgorithmException e1)
+		{
+			e1.printStackTrace();
+			return false;
+		} catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+			return false;
+		}*/
 	}
 	
 	
