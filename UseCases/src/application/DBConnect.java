@@ -34,7 +34,7 @@ class DBConnect
 	
 	
 	//Matteo neu
-	static Boolean neworder( String name )
+	static Boolean neworder( String name1 )
 	{
 		return true;
 	}
