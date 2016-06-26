@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OrdersOverviewController">
+  <center>
+    <Pane prefHeight="332.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="66.0" layoutY="149.0" text="Hier ensteht eine Bestellungsübersicht" />
+         </children>
+    </Pane>
+  </center>
+</BorderPane>
