@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 public class UC2_BestellungsaufgabeController
 {
 	@FXML
-	public void clickLogin() throws SQLException
+	public void clickaddorder() throws SQLException
 	{
 		return;
 	}
