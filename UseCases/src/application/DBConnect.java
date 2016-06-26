@@ -33,6 +33,13 @@ class DBConnect
 	}
 	
 	
+	//Matteo neu
+	static Boolean neworder( String name )
+	{
+		return true;
+	}
+	
+	
 	static Boolean checkUserAndPass(String username, String password)
 	{
 		try
