@@ -1,18 +1,18 @@
 package application;
 
 import java.sql.SQLException;
+import java.util.Date;
 
-import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 
 public class OrdersOverviewController
 {
 	@FXML TableView<Order> ordersTable;
 	
-	public OrdersOverviewController()
+	@FXML
+	public void initialize()
 	{
 		ObservableList<Order> orders = null;
 		
@@ -28,7 +28,10 @@ public class OrdersOverviewController
 		
 		//ordersTable.setEditable(true);
 		//ordersTable.setItems(orders);
+		//ordersTable.getItems().add(new Order(3, new Date(), "user1", "kunde2", "Offen"));
+		ordersTable.getItems().addAll(orders);
+		
 		
 		//((TableColumn)columns.get(1)).setCellValueFactory(new PropertyValueFactory("test"));
-	}
+	}	
 }

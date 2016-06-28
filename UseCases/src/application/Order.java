@@ -1,22 +1,29 @@
 package application;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 public class Order
 {
-	private SimpleIntegerProperty orderId;
+	private Integer orderId;
     private Date date;
-    private SimpleStringProperty username;
-    private SimpleStringProperty customerName;
-    private SimpleStringProperty state;
+    private String username;
+    private String customerName;
+    private String state;
     private ObservableList<Article> ArticleList;
 
     
+	public Order(int _orderId, Date _date, String _username, String _customerName, String _state)
+    {
+    	this.orderId = new Integer(_orderId);// SimpleIntegerProperty(_orderId);
+        this.date = _date;
+        this.username = new String(_username);
+        this.customerName = new String(_customerName);
+        this.state = new String(_state);
+    }
+	
 	
 	public ObservableList<Article> getArticleList() {
 		return ArticleList;
@@ -34,20 +41,11 @@ public class Order
 		ArticleList.remove(articlePos);
 	}
 
-	public Order(int _orderId, Date _date, String _username, String _customerName, String _state)
-    {
-    	this.orderId = new SimpleIntegerProperty(_orderId);
-        this.date = _date;
-        this.username = new SimpleStringProperty(_username);
-        this.customerName = new SimpleStringProperty(_customerName);
-        this.state = new SimpleStringProperty(_state);
-    }
-
-	public SimpleIntegerProperty getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(SimpleIntegerProperty orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 
@@ -58,28 +56,34 @@ public class Order
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public String getPrettyDate()
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		return sdf.format(date);
+	}
 
-	public SimpleStringProperty getUsername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(SimpleStringProperty username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public SimpleStringProperty getCustomerName() {
+	public String getCustomerName() {
 		return customerName;
 	}
 
-	public void setCustomerName(SimpleStringProperty customerName) {
+	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
 
-	public SimpleStringProperty getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(SimpleStringProperty state) {
+	public void setState(String state) {
 		this.state = state;
 	}
     
