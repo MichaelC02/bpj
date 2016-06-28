@@ -10,10 +10,10 @@
     <Pane prefHeight="531.0" prefWidth="573.0" BorderPane.alignment="CENTER">
       <children>
         <Button defaultButton="true" layoutX="437.0" layoutY="485.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
-        <TextField id="order_id" layoutX="134.0" layoutY="27.0" />
-        <TextField id="article" layoutX="134.0" layoutY="67.0" />
+        <TextField id="order_id" editable="false" layoutX="134.0" layoutY="27.0" />
+        <TextField id="article" editable="false" layoutX="134.0" layoutY="67.0" />
         <Label layoutX="10.0" layoutY="33.0" text="Bestellnummer:" />
-        <TextField id="article" layoutX="133.0" layoutY="109.0" />
+        <TextField id="article" editable="false" layoutX="133.0" layoutY="109.0" />
         <Label layoutX="9.0" layoutY="109.0" text="Status:" />
         <Label layoutX="10.0" layoutY="70.0" text="Erfasser:" />
         <TableView layoutX="14.0" layoutY="216.0" prefHeight="216.0" prefWidth="370.0">
