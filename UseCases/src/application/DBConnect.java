@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import com.mysql.jdbc.Statement;
 
 class DBConnect
 {
@@ -137,26 +138,15 @@ class DBConnect
 	
 	
 	//Matteo neu
-	static Boolean neworder( String name )
+	static boolean neworder()
 	{
 		try
 		{
 			conn = getConnection();
 			
-			int id;
+		/*	int id;
 			String id_str;
 			id_str = "1234567890";
-			// MD5 generieren START
-		/*	MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(password.getBytes("UTF-8"));
-
-			byte byteData[] = md.digest();
-		    StringBuffer sb = new StringBuffer();
-		    for (int i = 0; i < byteData.length; i++)
-		        sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-
-		    String md5password = sb.toString();*/
-		    // MD5 generieren ENDE
 		    
 			
 			PreparedStatement ps = conn.prepareStatement("Insert Into order Set order_id = ? and name = ?");
@@ -166,7 +156,11 @@ class DBConnect
 			ResultSet rs = ps.executeQuery();
 			rs.first();
 			
-			return rs.getInt(1) == 1;
+			return rs.getInt(1) == 1;*/
+			
+			java.sql.Statement statement = conn.createStatement();
+			statement.executeUpdate("Insert into orders Values(");
+			return true;
 		}
 		catch (SQLException e)
 		{
@@ -183,5 +177,6 @@ class DBConnect
 			return false;
 		}*/
 	}
+
 
 }
