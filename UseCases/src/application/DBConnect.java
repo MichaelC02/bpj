@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 class DBConnect
 {
 	static Connection conn;
@@ -31,6 +34,106 @@ class DBConnect
 		
 		return conn;
 	}
+	
+	
+	
+	static Boolean checkUserAndPass(String username, String password)
+	{
+		try
+		{
+			conn = getConnection();
+			
+			
+			// MD5 generieren START
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes("UTF-8"));
+
+			byte byteData[] = md.digest();
+		    StringBuffer sb = new StringBuffer();
+		    for (int i = 0; i < byteData.length; i++)
+		        sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+
+		    String md5password = sb.toString();
+		    // MD5 generieren ENDE
+		    
+			
+			PreparedStatement ps = conn.prepareStatement("select count(*) from user where username = ? and password = ?");
+			ps.setString(1, username);
+			ps.setString(2, md5password);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			return rs.getInt(1) == 1;
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		catch (NoSuchAlgorithmException e1)
+		{
+			e1.printStackTrace();
+			return false;
+		} catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	
+	
+	
+	static ObservableList<Order> GetOrders() throws SQLException
+	{
+		conn = getConnection();
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"select orderId, date, username, customerName, state"
+				+ "from orders o"
+				+ "join user u on o.userId = u.userId"
+				+ "join customers c on o.customerId = c.customerId");
+		
+		ResultSet rs = ps.executeQuery();
+		
+		ObservableList<Order> orders = FXCollections.observableArrayList();
+		while (rs.next())
+		{
+			orders.add(new Order(rs.getInt("orderId"),
+								 rs.getDate("date"),
+								 rs.getString("username"),
+								 rs.getString("customerName"),
+								 rs.getString("state")));
+	    }
+	
+		return orders;
+	}
+	
+	
+	static Order GetOrderById(int orderId) throws SQLException
+	{
+		conn = getConnection();
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"select date, username, customerName, state"
+				+ "from orders o"
+				+ "join user u on o.userId = u.userId"
+				+ "join customers c on o.customerId = c.customerId"
+				+ "where orderId = ?");
+		
+		ps.setInt(1, orderId);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		
+		return new Order(orderId,
+						 rs.getDate("date"),
+						 rs.getString("username"),
+						 rs.getString("customerName"),
+						 rs.getString("state"));
+	}
+	
 	
 	
 	//Matteo neu
@@ -80,51 +183,5 @@ class DBConnect
 			return false;
 		}*/
 	}
-	
-	
-	static Boolean checkUserAndPass(String username, String password)
-	{
-		try
-		{
-			conn = getConnection();
-			
-			
-			// MD5 generieren START
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(password.getBytes("UTF-8"));
 
-			byte byteData[] = md.digest();
-		    StringBuffer sb = new StringBuffer();
-		    for (int i = 0; i < byteData.length; i++)
-		        sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-
-		    String md5password = sb.toString();
-		    // MD5 generieren ENDE
-		    
-			
-			PreparedStatement ps = conn.prepareStatement("select count(*) from user where username = ? and password = ?");
-			ps.setString(1, username);
-			ps.setString(2, md5password);
-			
-			ResultSet rs = ps.executeQuery();
-			rs.first();
-			
-			return rs.getInt(1) == 1;
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		catch (NoSuchAlgorithmException e1)
-		{
-			e1.printStackTrace();
-			return false;
-		} catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-
-	}
 }

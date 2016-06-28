@@ -6,11 +6,15 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OrdersOverviewController">
-  <center>
-    <Pane prefHeight="332.0" prefWidth="370.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="66.0" layoutY="149.0" text="Hier ensteht eine Bestellungsübersicht" />
-         </children>
-    </Pane>
-  </center>
+   <center>
+      <TableView fx:id="ordersTable" editable="true" prefHeight="335.0" prefWidth="1423.0" BorderPane.alignment="CENTER">
+        <columns>
+        	<TableColumn prefWidth="75.0" text="Nr." />
+         	<TableColumn prefWidth="75.0" text="Datum" />
+          	<TableColumn prefWidth="75.0" text="Benutzer" />
+            <TableColumn prefWidth="59.0" text="Status" />
+            <TableColumn prefWidth="75.0" text="Kunde" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>

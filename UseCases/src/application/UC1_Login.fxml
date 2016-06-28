@@ -10,10 +10,10 @@
       <Pane prefHeight="332.0" prefWidth="370.0" BorderPane.alignment="CENTER">
          <children>
             <Button defaultButton="true" layoutX="158.0" layoutY="219.0" mnemonicParsing="false" onAction="#clickLogin" text="Login" />
-            <TextField fx:id="txtUsername" layoutX="101.0" layoutY="102.0" />
+            <TextField fx:id="txtUsername" layoutX="101.0" layoutY="102.0" text="michael" />
             <Label layoutX="102.0" layoutY="85.0" text="Benutzername" />
             <Label layoutX="102.0" layoutY="144.0" text="Passwort" />
-            <PasswordField fx:id="txtPassword" layoutX="102.0" layoutY="166.0" />
+            <PasswordField fx:id="txtPassword" layoutX="102.0" layoutY="166.0" text="michi" />
             <Label fx:id="lblErrorMsg" layoutX="80.0" layoutY="268.0" prefHeight="35.0" prefWidth="207.0" text="Fehler beim Einloggen! Bitte überprüfen Sie Ihre Angaben." textAlignment="CENTER" textFill="#e10b0b" textOverrun="CLIP" visible="false" wrapText="true" />
          </children>
       </Pane>
