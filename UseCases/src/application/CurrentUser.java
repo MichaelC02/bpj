@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CurrentUser {
-private final SimpleIntegerProperty userid; 
-private final SimpleStringProperty user_name;
+private SimpleIntegerProperty userid; 
+private SimpleStringProperty user_name;
 
 private CurrentUser(int usrid, String usr_name)
 {
@@ -15,6 +15,14 @@ private CurrentUser(int usrid, String usr_name)
 
 public SimpleIntegerProperty getUserid() {
 	return userid;
+}
+
+public void setUserid(SimpleIntegerProperty userid) {
+	this.userid = userid;
+}
+
+public void setUser_name(SimpleStringProperty user_name) {
+	this.user_name = user_name;
 }
 
 public SimpleStringProperty getUser_name() {
