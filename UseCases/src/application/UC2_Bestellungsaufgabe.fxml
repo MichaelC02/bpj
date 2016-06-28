@@ -6,13 +6,23 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
-  <center>
-    <Pane prefHeight="332.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+  <right>
+    <Pane prefHeight="531.0" prefWidth="573.0" BorderPane.alignment="CENTER">
       <children>
-        <Button defaultButton="true" layoutX="156.0" layoutY="203.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
-        <TextField layoutX="102.0" layoutY="103.0" />
-        <TextField layoutX="102.0" layoutY="133.0" />
+        <Button defaultButton="true" layoutX="437.0" layoutY="485.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
+        <TextField id="order_id" layoutX="134.0" layoutY="27.0" />
+        <TextField id="article" layoutX="134.0" layoutY="67.0" />
+        <Label layoutX="10.0" layoutY="33.0" text="Bestellnummer:" />
+        <TextField id="article" layoutX="133.0" layoutY="109.0" />
+        <Label layoutX="9.0" layoutY="109.0" text="Status:" />
+        <Label layoutX="10.0" layoutY="70.0" text="Erfasser:" />
+        <TableView layoutX="14.0" layoutY="216.0" prefHeight="216.0" prefWidth="370.0">
+          <columns>
+            <TableColumn prefWidth="75.0" text="Artikel" />
+            <TableColumn id="article" prefWidth="75.0" styleClass="class " text="Anzahl" />
+          </columns>
+        </TableView>
       </children>
     </Pane>
-  </center>
+  </right>
 </BorderPane>
