@@ -1,11 +1,11 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 public class Order
 {
@@ -14,15 +14,15 @@ public class Order
     private SimpleStringProperty username;
     private SimpleStringProperty customerName;
     private SimpleStringProperty state;
-    private ArrayList<Article> ArticleList;
+    private ObservableList<Article> ArticleList;
 
     
 	
-	public ArrayList<Article> getArticleList() {
+	public ObservableList<Article> getArticleList() {
 		return ArticleList;
 	}
 
-	public void setArticleList(ArrayList<Article> articleList) {
+	public void setArticleList(ObservableList<Article> articleList) {
 		ArticleList = articleList;
 	}
 	

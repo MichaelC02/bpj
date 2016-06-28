@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import com.mysql.jdbc.Statement;
@@ -128,11 +129,34 @@ class DBConnect
 		ResultSet rs = ps.executeQuery();
 		rs.first();
 		
-		return new Order(orderId,
-						 rs.getDate("date"),
-						 rs.getString("username"),
-						 rs.getString("customerName"),
-						 rs.getString("state"));
+		Order currentOrder = new Order(orderId,
+							    	   rs.getDate("date"),
+									   rs.getString("username"),
+									   rs.getString("customerName"),
+									   rs.getString("state"));
+		
+		ps = conn.prepareStatement(
+				"select a.name, a.article_id, a.price, oa.quantity"
+				+ "from article a"
+				+ "join order_article oa on a.article_id = oa.article_id "
+				+ "where order_id = ?");
+		
+		ps.setInt(1, orderId);
+		
+		rs = ps.executeQuery();
+		
+		ObservableList<Article> articles = FXCollections.observableArrayList();
+		while (rs.next())
+		{
+			articles.add(new Article(rs.getString("name"),
+					                 rs.getInt("article_id"),
+					                 rs.getInt("price"),
+								     rs.getInt("quantity")));
+	    }
+		
+		currentOrder.setArticleList(articles);
+	
+		return currentOrder;
 	}
 	
 	
