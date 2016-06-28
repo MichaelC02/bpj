@@ -1,6 +1,8 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.Date;
+
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,8 +14,27 @@ public class Order
     private SimpleStringProperty username;
     private SimpleStringProperty customerName;
     private SimpleStringProperty state;
+    private ArrayList<Article> ArticleList;
 
-    public Order(int _orderId, Date _date, String _username, String _customerName, String _state)
+    
+	
+	public ArrayList<Article> getArticleList() {
+		return ArticleList;
+	}
+
+	public void setArticleList(ArrayList<Article> articleList) {
+		ArticleList = articleList;
+	}
+	
+	public void addArticleToList(Article newArticle){
+		ArticleList.add(newArticle);
+	}
+	
+	public void removeArticleFromList(int articlePos){
+		ArticleList.remove(articlePos);
+	}
+
+	public Order(int _orderId, Date _date, String _username, String _customerName, String _state)
     {
     	this.orderId = new SimpleIntegerProperty(_orderId);
         this.date = _date;

@@ -25,9 +25,21 @@ public class UC6_OrderDetailsController {
 	@FXML private Label lblUserID;
 	@FXML private Label lblCustID;
 	
-	public void loadOrder(String OrderID)
+	public void loadOrder(int orderID)
 	{
-		
+		try {
+			Order CurrentOrder = DBConnect.GetOrderById(orderID);
+			
+			lblOrderID.setText(String.valueOf(orderID));
+			lblState.setText(String.valueOf(CurrentOrder.getState()));
+			lblDate.setText(String.valueOf(CurrentOrder.getDate()));
+			lblUserID.setText(String.valueOf(CurrentOrder.getUsername()));
+			lblCustID.setText(String.valueOf(CurrentOrder.getCustomerName()));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
