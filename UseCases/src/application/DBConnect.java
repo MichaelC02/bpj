@@ -91,9 +91,9 @@ class DBConnect
 		conn = getConnection();
 		
 		PreparedStatement ps = conn.prepareStatement(
-				"select orderId, date, username, customerName, state"
-				+ "from orders o"
-				+ "join user u on o.userId = u.userId"
+				"select orderId, date, username, customerName, state "
+				+ "from orders o "
+				+ "join user u on o.userId = u.userId "
 				+ "join customers c on o.customerId = c.customerId");
 		
 		ResultSet rs = ps.executeQuery();
@@ -117,10 +117,10 @@ class DBConnect
 		conn = getConnection();
 		
 		PreparedStatement ps = conn.prepareStatement(
-				"select date, username, customerName, state"
-				+ "from orders o"
-				+ "join user u on o.userId = u.userId"
-				+ "join customers c on o.customerId = c.customerId"
+				"select date, username, customerName, state "
+				+ "from orders o "
+				+ "join user u on o.userId = u.userId "
+				+ "join customers c on o.customerId = c.customerId "
 				+ "where orderId = ?");
 		
 		ps.setInt(1, orderId);
