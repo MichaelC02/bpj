@@ -136,8 +136,8 @@ class DBConnect
 									   rs.getString("state"));
 		
 		ps = conn.prepareStatement(
-				"select a.name, a.article_id, a.price, oa.quantity"
-				+ "from article a"
+				"select a.name, a.article_id, a.price, oa.quantity "
+				+ "from article a "
 				+ "join order_article oa on a.article_id = oa.article_id "
 				+ "where order_id = ?");
 		
