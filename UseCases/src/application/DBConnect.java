@@ -8,11 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.mysql.jdbc.Statement;
 
 class DBConnect
 {
@@ -59,30 +56,23 @@ class DBConnect
 		    // MD5 generieren ENDE
 		    
 			
-			PreparedStatement ps = conn.prepareStatement("select count(*) from user where username = ? and password = ?");
+			PreparedStatement ps = conn.prepareStatement("select userId from user where username = ? and password = ?");
 			ps.setString(1, username);
 			ps.setString(2, md5password);
 			
 			ResultSet rs = ps.executeQuery();
 			rs.first();
 			
-			return rs.getInt(1) == 1;
+			Integer userId = rs.getInt(1); // Wirft SQLException wenn no_data_found
+			CurrentUser.Set(userId, username);
+			return true;
 		}
-		catch (SQLException e)
+		catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e )
 		{
 			e.printStackTrace();
+			CurrentUser.Clear();
 			return false;
 		}
-		catch (NoSuchAlgorithmException e1)
-		{
-			e1.printStackTrace();
-			return false;
-		} catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-
 	}
 	
 	

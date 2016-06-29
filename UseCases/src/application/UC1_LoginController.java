@@ -24,7 +24,8 @@ public class UC1_LoginController
 		Boolean loginSuccess = DBConnect.checkUserAndPass(txtUsername.getText(), txtPassword.getText());
 		
 		if (loginSuccess)
-		{
+		{			
+			// Öffne Bestellübersicht
 			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
 			Scene scene = new Scene(windowOrderOverview);
 			Stage stage = (Stage)txtUsername.getScene().getWindow();

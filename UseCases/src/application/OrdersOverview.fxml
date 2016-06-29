@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -39,4 +40,13 @@
         </columns>
       </TableView>
    </center>
+   <bottom>
+      <Pane prefHeight="59.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnNewUser" layoutX="163.0" layoutY="16.0" mnemonicParsing="false" text="Neuen Benutzer erstellen" visible="false" />
+            <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="22.0" text="EIngeloggt als " />
+            <Button fx:id="btnLogout" cancelButton="true" layoutX="425.0" layoutY="16.0" mnemonicParsing="false" text="Logout" />
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>

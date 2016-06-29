@@ -1,19 +1,26 @@
 package application;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
 public class OrdersOverviewController
 {
 	@FXML TableView<Order> ordersTable;
+	@FXML Label lblLoggedInAs;
 	
 	@FXML
 	public void initialize()
 	{
+		//Setze Form-Titel
+		
+		
+		//Setze Label-Text
+		lblLoggedInAs.setText("Eingeloggt als " + CurrentUser.getUsername());
+		
 		ObservableList<Order> orders = null;
 		
 		try
