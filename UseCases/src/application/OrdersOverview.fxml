@@ -43,9 +43,9 @@
    <bottom>
       <Pane prefHeight="59.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnNewUser" layoutX="163.0" layoutY="16.0" mnemonicParsing="false" text="Neuen Benutzer erstellen" visible="false" />
+            <Button fx:id="btnNewUser" layoutX="163.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickAddUser" text="Neuen Benutzer erstellen" visible="false" />
             <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="22.0" text="EIngeloggt als " />
-            <Button fx:id="btnLogout" cancelButton="true" layoutX="425.0" layoutY="16.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="btnLogout" cancelButton="true" layoutX="425.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickLogout" text="Logout" />
          </children>
       </Pane>
    </bottom>

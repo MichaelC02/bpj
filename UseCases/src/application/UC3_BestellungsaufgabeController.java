@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class UC2_BestellungsaufgabeController
+public class UC3_BestellungsaufgabeController
 {
 	@FXML private TextField txtorderid;
 	@FXML private TextField txtcreator;

@@ -21,7 +21,7 @@ public class UC1_LoginController
 	@FXML
 	public void clickLogin() throws SQLException, IOException
 	{
-		Boolean loginSuccess = DBConnect.checkUserAndPass(txtUsername.getText(), txtPassword.getText());
+		Boolean loginSuccess = DBConnect.CheckUserAndPass(txtUsername.getText(), txtPassword.getText());
 		
 		if (loginSuccess)
 		{			
@@ -30,6 +30,7 @@ public class UC1_LoginController
 			Scene scene = new Scene(windowOrderOverview);
 			Stage stage = (Stage)txtUsername.getScene().getWindow();
 			stage.setScene(scene);
+			stage.setTitle("Bestellübersicht");
 			stage.show();
 		}
 		else

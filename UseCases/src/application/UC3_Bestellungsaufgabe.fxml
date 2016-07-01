@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC3_BestellungsaufgabeController">
   <left>
     <Pane prefHeight="531.0" prefWidth="573.0" BorderPane.alignment="CENTER">
       <children>

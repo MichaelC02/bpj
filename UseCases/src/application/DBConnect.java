@@ -15,7 +15,7 @@ class DBConnect
 {
 	static Connection conn;
 	
-	static Connection getConnection()
+	static Connection GetConnection()
 	{
 		if (conn == null)
 			try
@@ -36,11 +36,11 @@ class DBConnect
 	
 	
 	
-	static Boolean checkUserAndPass(String username, String password)
+	static Boolean CheckUserAndPass(String username, String password)
 	{
 		try
 		{
-			conn = getConnection();
+			conn = GetConnection();
 			
 			
 			// MD5 generieren START
@@ -56,15 +56,17 @@ class DBConnect
 		    // MD5 generieren ENDE
 		    
 			
-			PreparedStatement ps = conn.prepareStatement("select userId from user where username = ? and password = ?");
+			PreparedStatement ps = conn.prepareStatement("select userId, isAdmin from user where username = ? and password = ?");
 			ps.setString(1, username);
 			ps.setString(2, md5password);
 			
 			ResultSet rs = ps.executeQuery();
 			rs.first();
 			
-			Integer userId = rs.getInt(1); // Wirft SQLException wenn no_data_found
-			CurrentUser.Set(userId, username);
+			Integer userId = rs.getInt("userId"); // Wirft SQLException wenn no_data_found
+			String isAdmin = rs.getString("isAdmin");
+			
+			CurrentUser.Set(userId, username, isAdmin.equalsIgnoreCase("Y"));
 			return true;
 		}
 		catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e )
@@ -76,10 +78,53 @@ class DBConnect
 	}
 	
 	
+	static Boolean CheckUsernameExists(String username) throws SQLException
+	{
+		conn = GetConnection();
+		
+		PreparedStatement ps = conn.prepareStatement("select count(*) from user where username = ?");
+		ps.setString(1, username);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		
+		return rs.getInt(1) > 0;
+	}
+	
+	
+	static void CreateUser(String username, String password, Boolean isAdmin) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException
+	{
+		conn = GetConnection();
+		
+		
+		// MD5 generieren START
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes("UTF-8"));
+
+		byte byteData[] = md.digest();
+	    StringBuffer sb = new StringBuffer();
+	    for (int i = 0; i < byteData.length; i++)
+	        sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+
+	    String md5password = sb.toString();
+	    // MD5 generieren ENDE
+	    
+		
+	    String isAdminString = isAdmin ? "Y" : "N";
+	    
+		PreparedStatement ps = conn.prepareStatement("insert into user (userId, password, isAdmin) values (?, ?, ?)");
+		ps.setString(1, username);
+		ps.setString(2, md5password);
+		ps.setString(3, isAdminString);
+		
+		ResultSet rs = ps.executeQuery();
+	}
+	
+	
 	
 	static ObservableList<Order> GetOrders() throws SQLException
 	{
-		conn = getConnection();
+		conn = GetConnection();
 		
 		PreparedStatement ps = conn.prepareStatement(
 				"select orderId, date, username, customerName, state "
@@ -105,7 +150,7 @@ class DBConnect
 	
 	static Order GetOrderById(int orderId) throws SQLException
 	{
-		conn = getConnection();
+		conn = GetConnection();
 		
 		PreparedStatement ps = conn.prepareStatement(
 				"select date, username, customerName, state "
@@ -156,7 +201,7 @@ class DBConnect
 	{
 		try
 		{
-			conn = getConnection();
+			conn = GetConnection();
 			
 		/*	int id;
 			String id_str;
