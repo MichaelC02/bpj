@@ -13,9 +13,9 @@
       <children>
         <Button id="addorder" defaultButton="true" layoutX="437.0" layoutY="485.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
         <Label fx:id="order_id" layoutX="134.0" layoutY="27.0" />
-        <TextField fx:id="article" editable="false" layoutX="134.0" layoutY="67.0" />
+        <Label fx:id="lbcreator" layoutX="134.0" layoutY="70.0" />
         <Label layoutX="10.0" layoutY="33.0" text="Bestellnummer:" />
-        <TextField fx:id="article" editable="false" layoutX="133.0" layoutY="109.0" />
+        <Label fx:id="lbstate" layoutX="133.0" layoutY="109.0" />
         <Label layoutX="9.0" layoutY="109.0" text="Status:" />
         <Label layoutX="10.0" layoutY="70.0" text="Erfasser:" />
         <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="230.0" prefHeight="216.0" prefWidth="545.0" BorderPane.alignment="CENTER">

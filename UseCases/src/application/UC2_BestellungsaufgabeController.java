@@ -14,7 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class UC2_BestellungsaufgabeController
 {
 	@FXML private TextField txtorderid;
-	@FXML private TextField txtcreator;
+	@FXML private Label lbcreator;
+	@FXML private Label lbstate;
 	@FXML private TextField txtarticle_id;
 	@FXML private TextField txtquantity;
 	@FXML private TextField txtarticle_name;
@@ -39,6 +40,9 @@ public class UC2_BestellungsaufgabeController
 	@FXML
 	public void clickaddorder() throws SQLException
 	{
+		
+		ObservableList<Article> allarticles;
+		allarticles = table.getItems();
 		
 		
 		return;
@@ -111,8 +115,14 @@ public class UC2_BestellungsaufgabeController
 		articleselected = table.getSelectionModel().getSelectedItems();
 		
 		articleselected.forEach(allarticles::remove);
-		//table.get().clearSelection();
 		return;
+	}
+	
+	@FXML
+	public void initialize()
+	{
+		lbcreator.setText(CurrentUser.getUsername());
+		lbstate.setText("Erfasst");
 	}
 	
 	public boolean validate( )
@@ -145,11 +155,6 @@ public class UC2_BestellungsaufgabeController
 			error = true;
 		}
 
-		
-		if(error == false)
-		{
-			
-		}
 		if(error == true)
 		{
 			lblErrorMsg.setVisible(true);
