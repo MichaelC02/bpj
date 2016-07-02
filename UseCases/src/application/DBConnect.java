@@ -233,17 +233,14 @@ class DBConnect
 	static int get_max_orderid()throws SQLException
 	{
 		conn = GetConnection();
-		int orderid = 0;
 		
 		PreparedStatement ps = conn.prepareStatement("SELECT MAX(orderId) FROM orders");
 		
-		ResultSet rs = ps.getResultSet();
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		int orderid = rs.getInt(1);
 
-		while (rs.next())
-		{
-			orderid =  rs.getInt("orderId");
-		}
-		return orderid++;
+		return ++orderid;
 	}
 	
 	
