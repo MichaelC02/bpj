@@ -26,7 +26,7 @@ public class UC1_LoginController
 		if (loginSuccess)
 		{			
 			// Öffne Bestellübersicht
-			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
+			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverviewController.fxml"));
 			Scene scene = new Scene(windowOrderOverview);
 			Stage stage = (Stage)txtUsername.getScene().getWindow();
 			stage.setScene(scene);

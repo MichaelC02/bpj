@@ -20,6 +20,7 @@ public class UC2_BestellungsaufgabeController
 	@FXML private TextField txtarticle_name;
 	@FXML private Label lblErrorMsg;
 	@FXML private TableView<Article> table = new TableView<Article>();
+	//@FXML private TableView table = new TableView();
 	private final ObservableList<Article> data = FXCollections.observableArrayList( ) ;
 	
 	String article_name;
@@ -44,7 +45,7 @@ public class UC2_BestellungsaufgabeController
 		article_id = txtarticle_id.getText();		
 		article_name = txtarticle_name.getText();	
 		quantity = txtquantity.getText();
-		//Article article;
+		
 		//Article[] article_list = new Article[50];
 		boolean lv_valid;
 		
@@ -54,16 +55,22 @@ public class UC2_BestellungsaufgabeController
 		{
 			quant = Integer.parseInt(quantity);
 			art_id = Integer.parseInt(article_id);
-		//	article = new Article(article_name, art_id, 0, quant);	
-			data.add( new Article(article_name, art_id, 0, quant) );
-		            
+			//table.getColumns().addAll(article_id, article_name, quantity);
+			//data.add( new Article(article_name, art_id, 0, quant) );
+			
+			
+			Article article = new Article(article_name, art_id, 0, quant);
+		    article.setArticleID(art_id);        
 			        
 			
 			
-			TableColumn articleidCol = new TableColumn("Artikelnummer");
+			/*TableColumn articleidCol = new TableColumn("Artikelnummer");
 	        articleidCol.setCellValueFactory(new PropertyValueFactory<Article,Integer>("article_id"));
 	        
-	        table.setItems(data);
+	        table.getColumns().setAll(articleidCol);*/
+	        
+	      //  table.setItems(data);
+	        table.getItems().add(article);
 		}
 		
 		
