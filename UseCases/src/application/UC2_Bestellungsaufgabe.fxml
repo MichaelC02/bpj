@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TreeItemPropertyValueFactory?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
   <left>
@@ -16,13 +18,30 @@
         <TextField fx:id="article" editable="false" layoutX="133.0" layoutY="109.0" />
         <Label layoutX="9.0" layoutY="109.0" text="Status:" />
         <Label layoutX="10.0" layoutY="70.0" text="Erfasser:" />
-        <TableView layoutX="14.0" layoutY="216.0" prefHeight="216.0" prefWidth="545.0">
+        <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="210.0" prefHeight="216.0" prefWidth="545.0" BorderPane.alignment="CENTER">
           <columns>
-            <TableColumn fx:id="articleidCol" maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Artikel ID" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="140.0" text="Artikel" />
-            <TableColumn fx:id="article" prefWidth="75.0" styleClass="class" text="Anzahl" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="118.0" text="Stückpreis" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="129.0" text="Gesamtpreis" />
+            <TableColumn prefWidth="89.0" text="Artikel ID">
+           	    <cellValueFactory>
+        			<PropertyValueFactory property="articleID"/>
+        		</cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="140.0" text="Artikel">
+            	<cellValueFactory>
+        			<PropertyValueFactory property="name"/>
+        		</cellValueFactory>
+            </TableColumn>
+            <TableColumn  prefWidth="75.0" styleClass="class" text="Anzahl">
+            	<cellValueFactory>
+        			<PropertyValueFactory property="quantity"/>
+        		</cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="118.0" text="Stückpreis">
+            	<cellValueFactory>
+        			<PropertyValueFactory property="price"/>
+        		</cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="129.0" text="Gesamtpreis"/>
+            	
           </columns>
         </TableView>
         <TextField fx:id="txtquantity" layoutX="240.0" layoutY="175.0" prefWidth="74.0" />

@@ -19,9 +19,14 @@ public class UC2_BestellungsaufgabeController
 	@FXML private TextField txtquantity;
 	@FXML private TextField txtarticle_name;
 	@FXML private Label lblErrorMsg;
-	@FXML private TableView<Article> table = new TableView<Article>();
+	@FXML private TableView<Article> table ;
+	  //    private final ObservableList<Article> data = table.getItems();
 	//@FXML private TableView table = new TableView();
-	private final ObservableList<Article> data = FXCollections.observableArrayList( ) ;
+//	private final ObservableList<Article> data = FXCollections.observableArrayList( 
+		 					//	new Article( "test", 10, 0, 50 ) ) ;
+	
+	//@FXML TableColumn<Article, String> articleidCol;
+	
 	
 	String article_name;
 	String article_id;
@@ -41,12 +46,11 @@ public class UC2_BestellungsaufgabeController
 	public void clickaddarticle() throws SQLException
 	{
 		
-		
-		article_id = txtarticle_id.getText();		
+
+	    article_id = txtarticle_id.getText();		
 		article_name = txtarticle_name.getText();	
 		quantity = txtquantity.getText();
-		
-		//Article[] article_list = new Article[50];
+				
 		boolean lv_valid;
 		
 		lv_valid = validate();
@@ -60,17 +64,10 @@ public class UC2_BestellungsaufgabeController
 			
 			
 			Article article = new Article(article_name, art_id, 0, quant);
-		    article.setArticleID(art_id);        
-			        
-			
-			
-			/*TableColumn articleidCol = new TableColumn("Artikelnummer");
-	        articleidCol.setCellValueFactory(new PropertyValueFactory<Article,Integer>("article_id"));
+	
 	        
-	        table.getColumns().setAll(articleidCol);*/
-	        
-	      //  table.setItems(data);
-	        table.getItems().add(article);
+	        table.getItems().addAll(article);
+
 		}
 		
 		
@@ -83,19 +80,19 @@ public class UC2_BestellungsaufgabeController
 	{
 		
 		
-		if( article_id == null )
+		if( article_id == "")
 		{
 			lblErrorMsg.setText("Geben Sie eine Artikelnummer ein!");
 			return false;
 		}
 		
-		else if( article_name == null )
+		else if( article_name == "" )
 		{
 			lblErrorMsg.setText("Geben Sie einen Artikelnamen ein!");
 			return false;
 		}
 		
-		else if( quantity == null )
+		else if( quantity == "" )
 		{
 			lblErrorMsg.setText("Geben Sie eine Artikelmenge ein!");
 			return false;
