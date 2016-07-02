@@ -33,6 +33,8 @@ public class UC2_BestellungsaufgabeController
 	int art_id;
 	String quantity;
 	int quant;
+	String error_msg;
+	Boolean error = false;
 	
 	@FXML
 	public void clickaddorder() throws SQLException
@@ -57,17 +59,43 @@ public class UC2_BestellungsaufgabeController
 		
 		if(lv_valid == true)
 		{
-			quant = Integer.parseInt(quantity);
-			art_id = Integer.parseInt(article_id);
-			//table.getColumns().addAll(article_id, article_name, quantity);
-			//data.add( new Article(article_name, art_id, 0, quant) );
-			
-			
-			Article article = new Article(article_name, art_id, 0, quant);
-	
-	        
-	        table.getItems().addAll(article);
-
+			error_msg = "";
+			error = false;
+			try {
+				quant = Integer.parseInt(quantity);
+			} catch (Exception e) {
+				error = true;
+				error_msg +="Geben Sie einen ganzzahligen\n Wert als Anzahl ein!\n";
+			}
+			try {
+				art_id = Integer.parseInt(article_id);
+			} catch (Exception e) {
+				error = true;
+				error_msg += "Geben Sie einen ganzzahligen\n Wert als ID ein!";
+			}
+			if (error == false){
+				lblErrorMsg.setVisible(false);
+				
+				
+				Article article = new Article(article_name, art_id, 0, quant);
+				
+		        
+		        table.getItems().addAll(article);
+		        txtarticle_id.clear();
+		        txtarticle_name.clear();
+		        txtquantity.clear();
+		        article_id = "";
+		        article_name = "";
+		        quantity = "";
+		        art_id = 0;
+		        quant = 0; 
+			}
+			else
+			{
+				lblErrorMsg.setVisible(true);
+				lblErrorMsg.setText("");
+				lblErrorMsg.setText(error_msg);
+			}
 		}
 		
 		
@@ -75,26 +103,58 @@ public class UC2_BestellungsaufgabeController
 		return;
 	}
 	
+	@FXML
+	public void clickdelarticle() throws SQLException
+	{
+		ObservableList<Article> articleselected, allarticles;
+		allarticles = table.getItems();
+		articleselected = table.getSelectionModel().getSelectedItems();
+		
+		articleselected.forEach(allarticles::remove);
+		//table.get().clearSelection();
+		return;
+	}
 	
 	public boolean validate( )
 	{
 		
-		
-		if( article_id == "")
+		error_msg = "";
+		error = false;
+		//check if fields are initial 
+		if( article_id.equals(""))
 		{
-			lblErrorMsg.setText("Geben Sie eine Artikelnummer ein!");
-			return false;
+			lblErrorMsg.setVisible(true);
+			error_msg = "Geben Sie eine Artikelnummer ein!\n";
+			//lblErrorMsg.setText("Geben Sie eine Artikelnummer ein!");
+			error = true;
 		}
 		
-		else if( article_name == "" )
+		if( article_name.equals("") )
 		{
-			lblErrorMsg.setText("Geben Sie einen Artikelnamen ein!");
-			return false;
+			lblErrorMsg.setVisible(true);
+			error_msg += "Geben Sie einen Artikelnamen ein!\n";
+			//lblErrorMsg.setText("Geben Sie einen Artikelnamen ein!");
+			error = true;
 		}
 		
-		else if( quantity == "" )
+		if( quantity.equals("") )
 		{
-			lblErrorMsg.setText("Geben Sie eine Artikelmenge ein!");
+			lblErrorMsg.setVisible(true);
+			error_msg += "Geben Sie eine Artikelmenge ein!\n";
+		//	lblErrorMsg.setText("Geben Sie eine Artikelmenge ein!");
+			error = true;
+		}
+
+		
+		if(error == false)
+		{
+			
+		}
+		if(error == true)
+		{
+			lblErrorMsg.setVisible(true);
+			lblErrorMsg.setText("");
+			lblErrorMsg.setText(error_msg);
 			return false;
 		}
 		else
