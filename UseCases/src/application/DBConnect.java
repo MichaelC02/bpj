@@ -235,15 +235,13 @@ class DBConnect
 		conn = GetConnection();
 		int orderid = 0;
 		
-		PreparedStatement ps = conn.prepareStatement(
-				"SELECT MAX(orderId) "
-				+ "FROM orders ");
+		PreparedStatement ps = conn.prepareStatement("SELECT MAX(orderId) FROM orders");
 		
 		ResultSet rs = ps.getResultSet();
 
 		while (rs.next())
 		{
-		orderid =  rs.getInt("orderId");
+			orderid =  rs.getInt("orderId");
 		}
 		return orderid++;
 	}
