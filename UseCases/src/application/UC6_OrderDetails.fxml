@@ -30,7 +30,7 @@
                 <TableColumn prefWidth="100.0" text="Gesamtpreis" />
               </columns>
             </TableView>
-            <Button layoutX="504.0" layoutY="494.0" mnemonicParsing="false" text="Schließen" />
+            <Button layoutX="504.0" layoutY="494.0" mnemonicParsing="false" text="Zurück" onAction="#clickBack" />
          </children>
     </Pane>
   </center>

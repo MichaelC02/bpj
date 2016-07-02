@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -56,7 +59,7 @@ class DBConnect
 		    // MD5 generieren ENDE
 		    
 			
-			PreparedStatement ps = conn.prepareStatement("select userId, isAdmin from user where username = ? and password = ?");
+			PreparedStatement ps = conn.prepareStatement("select userId, isAdmin, last_login from user where username = ? and password = ?");
 			ps.setString(1, username);
 			ps.setString(2, md5password);
 			
@@ -66,7 +69,18 @@ class DBConnect
 			Integer userId = rs.getInt("userId"); // Wirft SQLException wenn no_data_found
 			String isAdmin = rs.getString("isAdmin");
 			
-			CurrentUser.Set(userId, username, isAdmin.equalsIgnoreCase("Y"));
+			// Datum muss als Timestamp geholt werden, weil ResultSet.getDate keine Uhrzeit liefert
+			Timestamp lastLoginTS = rs.getTimestamp("last_login");
+			Date lastLogin = new Date(lastLoginTS.getTime());
+			
+			CurrentUser.Set(userId, username, isAdmin.equalsIgnoreCase("Y"), lastLogin);
+			
+			
+			// Setze letztes Login-Datum
+			ps = conn.prepareStatement("update user set last_login = sysdate() where userId = ?");
+			ps.setInt(1, userId);
+			Boolean dummy = ps.execute();
+			
 			return true;
 		}
 		catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e )

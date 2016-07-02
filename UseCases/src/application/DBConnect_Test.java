@@ -29,6 +29,12 @@ public class DBConnect_Test
 	}
 	
 	@Test
+	public void testCheckUserAndPass_FALSE_2()
+	{
+		Assert.assertFalse(DBConnect.CheckUserAndPass("0815", "michi"));
+	}
+	
+	@Test
 	public void testCheckUsernameExists_TRUE()
 	{
 		try

@@ -25,21 +25,32 @@ public class UC6_OrderDetailsController {
 	@FXML private Label lblUserID;
 	@FXML private Label lblCustID;
 	
-	public void loadOrder(int orderID)
+	public void loadOrder(Order currentOrder)
 	{
-		try {
-			Order CurrentOrder = DBConnect.GetOrderById(orderID);
-			
-			lblOrderID.setText(String.valueOf(orderID));
-			lblState.setText(String.valueOf(CurrentOrder.getState()));
-			lblDate.setText(String.valueOf(CurrentOrder.getDate()));
-			lblUserID.setText(String.valueOf(CurrentOrder.getUsername()));
-			lblCustID.setText(String.valueOf(CurrentOrder.getCustomerName()));
-			
-		} catch (SQLException e) {
+		lblOrderID.setText(String.valueOf(currentOrder.getOrderId()));
+		lblState.setText(String.valueOf(currentOrder.getState()));
+		lblDate.setText(String.valueOf(currentOrder.getDate()));
+		lblUserID.setText(String.valueOf(currentOrder.getUsername()));
+		lblCustID.setText(String.valueOf(currentOrder.getCustomerName()));
+	}
+
+	@FXML
+	public void clickBack()
+	{
+		// Öffne Bestellübersicht
+		try
+		{
+			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
+			Scene scene = new Scene(windowOrderOverview);
+			Stage stage = (Stage)lblOrderID.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Bestellübersicht");
+			stage.show();
+		}
+		catch(IOException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }

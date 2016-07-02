@@ -12,27 +12,27 @@
    <center>
       <TableView fx:id="ordersTable" editable="true" prefHeight="335.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <columns>
-        	<TableColumn prefWidth="75.0" text="Nr.">
+        	<TableColumn prefWidth="60.0" text="Nr.">
         		<cellValueFactory>
         			<PropertyValueFactory property="orderId" />
         		</cellValueFactory>
         	</TableColumn>
-         	<TableColumn prefWidth="75.0" text="Datum">
+         	<TableColumn prefWidth="120.0" text="Datum">
         		<cellValueFactory>
         			<PropertyValueFactory property="prettyDate" />
         		</cellValueFactory>
         	</TableColumn>
-          	<TableColumn prefWidth="75.0" text="Benutzer">
+          	<TableColumn prefWidth="100.0" text="Benutzer">
         		<cellValueFactory>
         			<PropertyValueFactory property="username" />
         		</cellValueFactory>
         	</TableColumn>
-        	<TableColumn prefWidth="75.0" text="Kunde">
+        	<TableColumn prefWidth="130.0" text="Kunde">
         		<cellValueFactory>
         			<PropertyValueFactory property="customerName" />
         		</cellValueFactory>
         	</TableColumn>
-            <TableColumn prefWidth="59.0" text="Status">
+            <TableColumn prefWidth="90.0" text="Status">
         		<cellValueFactory>
         			<PropertyValueFactory property="state" />
         		</cellValueFactory>
@@ -43,9 +43,9 @@
    <bottom>
       <Pane prefHeight="59.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnNewUser" layoutX="163.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickAddUser" text="Neuen Benutzer erstellen" visible="false" />
-            <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="22.0" text="EIngeloggt als " />
-            <Button fx:id="btnLogout" cancelButton="true" layoutX="425.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickLogout" text="Logout" />
+            <Button fx:id="btnNewUser" layoutX="306.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickAddUser" text="Neuer User" />
+            <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="16.0" text="EIngeloggt als " />
+            <Button fx:id="btnLogout" cancelButton="true" layoutX="399.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickLogout" prefHeight="27.0" prefWidth="87.0" text="Logout" />
          </children>
       </Pane>
    </bottom>
