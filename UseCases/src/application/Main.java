@@ -14,7 +14,7 @@ public class Main extends Application {
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("UC1_Login.fxml"));
 			
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setTitle("Benutzerauthentifizierung");

@@ -13,19 +13,19 @@ public class DBConnect_Test
 	@Test
 	public void testConnection()
 	{
-		Assert.assertNotNull(DBConnect.getConnection());
+		Assert.assertNotNull(DBConnect.GetConnection());
 	}
 	
 	@Test
 	public void testCheckUserAndPass_TRUE()
 	{
-		Assert.assertTrue(DBConnect.checkUserAndPass("michael", "michi"));
+		Assert.assertTrue(DBConnect.CheckUserAndPass("michael", "michi"));
 	}
 	
 	@Test
 	public void testCheckUserAndPass_FALSE()
 	{
-		Assert.assertFalse(DBConnect.checkUserAndPass("michael", "hannes"));
+		Assert.assertFalse(DBConnect.CheckUserAndPass("michael", "hannes"));
 	}
 	
 	@Test
