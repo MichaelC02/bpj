@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="415.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UC2_AddUserController">
+   <center>
+      <Pane prefHeight="198.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button defaultButton="true" layoutX="80.0" layoutY="322.0" mnemonicParsing="false" onAction="#clickOk" prefHeight="27.0" prefWidth="85.0" text="OK" />
+            <TextField fx:id="txtUsername" layoutX="101.0" layoutY="102.0" />
+            <Label layoutX="102.0" layoutY="82.0" text="Benutzername" />
+            <Label layoutX="102.0" layoutY="146.0" text="Passwort" />
+            <PasswordField fx:id="txtPassword" layoutX="102.0" layoutY="166.0" />
+            <PasswordField fx:id="txtPasswordRepeat" layoutX="101.0" layoutY="229.0" />
+            <Label layoutX="101.0" layoutY="209.0" text="Passwort wiederholen" />
+            <Button cancelButton="true" layoutX="201.0" layoutY="322.0" mnemonicParsing="false" onAction="#clickCancel" text="Abbrechen" />
+            <Label fx:id="lblErrorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="374.0" prefHeight="17.0" prefWidth="317.0" text="Label" textAlignment="CENTER" textFill="#d30909" visible="false" wrapText="true" />
+            <CheckBox fx:id="cbIsAdmin" layoutX="101.0" layoutY="272.0" mnemonicParsing="false" text="Administrator" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

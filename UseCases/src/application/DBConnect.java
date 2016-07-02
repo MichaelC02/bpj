@@ -112,12 +112,12 @@ class DBConnect
 		
 	    String isAdminString = isAdmin ? "Y" : "N";
 	    
-		PreparedStatement ps = conn.prepareStatement("insert into user (userId, password, isAdmin) values (?, ?, ?)");
+		PreparedStatement ps = conn.prepareStatement("insert into user (username, password, isAdmin) values (?, ?, ?)");
 		ps.setString(1, username);
 		ps.setString(2, md5password);
 		ps.setString(3, isAdminString);
 		
-		ResultSet rs = ps.executeQuery();
+		Boolean dummy = ps.execute();
 	}
 	
 	

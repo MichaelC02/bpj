@@ -29,6 +29,32 @@ public class DBConnect_Test
 	}
 	
 	@Test
+	public void testCheckUsernameExists_TRUE()
+	{
+		try
+		{
+			Assert.assertTrue(DBConnect.CheckUsernameExists("michael"));
+		}
+		catch (SQLException e)
+		{
+			fail();
+		}
+	}
+	
+	@Test
+	public void testCheckUsernameExists_FALSE()
+	{
+		try
+		{
+			Assert.assertFalse(DBConnect.CheckUsernameExists("0815"));
+		}
+		catch (SQLException e)
+		{
+			fail();
+		}
+	}
+	
+	@Test
 	public void testGetOrders()
 	{
 		try
