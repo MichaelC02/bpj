@@ -6,12 +6,14 @@ public class Article {
 	private int articleID;
 	private int price;
 	private int quantity;
+	private int totprice;
 	
 	public Article(String name, int articleID, int price, int quantity) {
 		this.name = name;
 		this.articleID = articleID;
 		this.price = price;
 		this.quantity = quantity;
+		this.totprice = price * quantity;
 	}
 	
 	public int getQuantity() {
@@ -39,6 +41,14 @@ public class Article {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getTotprice() {
+		return totprice;
+	}
+
+	public void setTotprice(int totprice) {
+		this.totprice = totprice;
 	}
 	
 	
