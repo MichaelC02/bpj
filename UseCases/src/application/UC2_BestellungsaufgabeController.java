@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class UC2_BestellungsaufgabeController
 {
-	@FXML private TextField txtorderid;
 	@FXML private Label lbcreator;
 	@FXML private Label lbstate;
 	@FXML private TextField txtarticle_id;
@@ -21,12 +20,7 @@ public class UC2_BestellungsaufgabeController
 	@FXML private TextField txtarticle_name;
 	@FXML private Label lblErrorMsg;
 	@FXML private TableView<Article> table ;
-	  //    private final ObservableList<Article> data = table.getItems();
-	//@FXML private TableView table = new TableView();
-//	private final ObservableList<Article> data = FXCollections.observableArrayList( 
-		 					//	new Article( "test", 10, 0, 50 ) ) ;
-	
-	//@FXML TableColumn<Article, String> articleidCol;
+	@FXML private TableView<Article> dbtable ;
 	
 	
 	String article_name;
@@ -36,6 +30,7 @@ public class UC2_BestellungsaufgabeController
 	int quant;
 	String error_msg;
 	Boolean error = false;
+	Article selarticle;
 	
 	@FXML
 	public void clickaddorder() throws SQLException
@@ -44,6 +39,7 @@ public class UC2_BestellungsaufgabeController
 		ObservableList<Article> allarticles;
 		allarticles = table.getItems();
 		
+		DBConnect.neworder(allarticles);
 		
 		return;
 	}
@@ -81,7 +77,7 @@ public class UC2_BestellungsaufgabeController
 				lblErrorMsg.setVisible(false);
 				
 				
-				Article article = new Article(article_name, art_id, 0, quant);
+				Article article = new Article(article_name, art_id, selarticle.getPrice(), quant);
 				
 		        
 		        table.getItems().addAll(article);
@@ -122,7 +118,35 @@ public class UC2_BestellungsaufgabeController
 	public void initialize()
 	{
 		lbcreator.setText(CurrentUser.getUsername());
-		lbstate.setText("Erfasst");
+		lbstate.setText("In Erfassung");
+		
+		ObservableList<Article> articles = null;
+		
+		try
+		{
+			articles = DBConnect.GetArticles();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch blocks
+			e.printStackTrace();
+		}
+		
+		// Tabelle befüllen
+		dbtable.getItems().addAll(articles);
+		
+		
+		dbtable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+		    
+			selarticle = dbtable.getSelectionModel().getSelectedItem();
+			
+			art_id = selarticle.getArticleID();
+			article_id = Integer.toString(art_id);
+			txtarticle_id.setText(article_id);
+			
+			txtarticle_name.setText(selarticle.getName());
+		    
+		});
 	}
 	
 	public boolean validate( )

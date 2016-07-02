@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -147,6 +150,28 @@ class DBConnect
 		return orders;
 	}
 	
+	static ObservableList<Article> GetArticles() throws SQLException
+	{
+		conn = GetConnection();
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"select article_id, name, price "
+				+ "from article "
+				);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		ObservableList<Article> articles = FXCollections.observableArrayList();
+		while (rs.next())
+		{
+			articles.add(new Article(rs.getString("name"),
+								     rs.getInt("article_id"),
+									 rs.getInt("price"), 0));
+	    }
+	
+		return articles;
+	}
+	
 	
 	static Order GetOrderById(int orderId) throws SQLException
 	{
@@ -194,31 +219,63 @@ class DBConnect
 		return currentOrder;
 	}
 	
+	static int get_max_orderid()throws SQLException
+	{
+		conn = GetConnection();
+		int orderid = 0;
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"SELECT MAX(orderId) "
+				+ "FROM orders ");
+		
+		ResultSet rs = ps.getResultSet();
+
+		while (rs.next())
+		{
+		orderid =  rs.getInt("orderId");
+		}
+		return orderid++;
+	}
 	
 	
 	//Matteo neu
-	static boolean neworder()
+	static boolean neworder(ObservableList<Article> articles)
 	{
+		Article article;
 		try
 		{
 			conn = GetConnection();
 			
-		/*	int id;
-			String id_str;
-			id_str = "1234567890";
+			int orderid = get_max_orderid();
+			String ordid = Integer.toString(orderid);
+			
+			for(int row = 0; row < articles.size(); row++)
+			{
+				article = articles.get(row);
+				int art_id = article.getArticleID();
+				String articleid = Integer.toString(art_id);
+				int pric = article.getPrice();
+				String price = Integer.toString(pric);
+				int quan = article.getQuantity();
+				String quantity = Integer.toString(quan);
+			
+			
 		    
 			
-			PreparedStatement ps = conn.prepareStatement("Insert Into order Set order_id = ? and name = ?");
-			ps.setString(1, id_str);
-			ps.setString(2, name);
+				PreparedStatement ps = conn.prepareStatement("Insert Into order Set order_id = ? and article_id = ? and price = ? and quantity = ?");
+				ps.setString(1, ordid);
+				ps.setString(2, articleid);
+				ps.setString(1, price);
+				ps.setString(2, quantity);
+				
+			    ps.executeQuery();
+				
 			
-			ResultSet rs = ps.executeQuery();
-			rs.first();
+			//return rs.getInt(1) == 1;
+			}
 			
-			return rs.getInt(1) == 1;*/
-			
-			java.sql.Statement statement = conn.createStatement();
-			statement.executeUpdate("Insert into orders Values(");
+		/*	java.sql.Statement statement = conn.createStatement();
+			statement.executeUpdate("Insert into orders Values(");*/
 			return true;
 		}
 		catch (SQLException e)
