@@ -1,15 +1,20 @@
 package application;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class UC2_BestellungsaufgabeController
 {
@@ -18,9 +23,11 @@ public class UC2_BestellungsaufgabeController
 	@FXML private TextField txtarticle_id;
 	@FXML private TextField txtquantity;
 	@FXML private TextField txtarticle_name;
+	@FXML private Label lbcustomer;
 	@FXML private Label lblErrorMsg;
 	@FXML private TableView<Article> table ;
 	@FXML private TableView<Article> dbtable ;
+	@FXML private TableView<customer> dbcust ;
 	
 	
 	String article_name;
@@ -31,15 +38,25 @@ public class UC2_BestellungsaufgabeController
 	String error_msg;
 	Boolean error = false;
 	Article selarticle;
+	int cust_id;
 	
 	@FXML
-	public void clickaddorder() throws SQLException
+	public void clickaddorder() throws SQLException, IOException
 	{
-		
+		error = false;
 		ObservableList<Article> allarticles;
 		allarticles = table.getItems();
 		
-		DBConnect.neworder(allarticles);
+		error = DBConnect.neworder(allarticles, cust_id);
+		if(error == false)
+		{
+			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
+			Scene scene = new Scene(windowOrderOverview);
+			Stage stage = (Stage)txtquantity.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Bestellübersicht");
+			stage.show();
+		}
 		
 		return;
 	}
@@ -115,12 +132,23 @@ public class UC2_BestellungsaufgabeController
 	}
 	
 	@FXML
+	public void clickaddcust() throws SQLException
+	{
+		customer customer;
+		customer = dbcust.getSelectionModel().getSelectedItem();
+		
+		lbcustomer.setText(customer.getCustomerName());
+		cust_id = customer.getCustomerId();
+	}
+	
+	@FXML
 	public void initialize()
 	{
 		lbcreator.setText(CurrentUser.getUsername());
 		lbstate.setText("In Erfassung");
 		
 		ObservableList<Article> articles = null;
+		ObservableList<customer> cust = null;
 		
 		try
 		{
@@ -135,6 +163,17 @@ public class UC2_BestellungsaufgabeController
 		// Tabelle befüllen
 		dbtable.getItems().addAll(articles);
 		
+		try
+		{
+			cust = DBConnect.get_custs();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch blocks
+			e.printStackTrace();
+		}
+		
+		dbcust.getItems().addAll(cust);
 		
 		dbtable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 		    

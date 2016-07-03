@@ -7,13 +7,12 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.cell.TreeItemPropertyValueFactory?>
 
-<BorderPane prefHeight="587.0" prefWidth="610.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
+<BorderPane prefHeight="836.0" prefWidth="610.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
   <top>
-    <Pane prefHeight="587.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+    <Pane prefHeight="836.0" prefWidth="610.0" BorderPane.alignment="CENTER">
       <children>
-        <Button id="addorder" defaultButton="true" layoutX="474.0" layoutY="541.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
         <Label fx:id="lbcreator" layoutX="81.0" layoutY="15.0" />
-        <Label fx:id="lbstate" layoutX="76.0" layoutY="39.0"  />
+        <Label fx:id="lbstate" layoutX="76.0" layoutY="39.0" />
         <Label layoutX="10.0" layoutY="39.0" text="Status:" />
         <Label layoutX="10.0" layoutY="14.0" text="Erfasser:" />
         <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="312.0" prefHeight="216.0" prefWidth="545.0">
@@ -70,6 +69,24 @@
             </TableColumn>
           </columns>
         </TableView>
+        <TableView fx:id="dbcust" layoutX="15.0" layoutY="545.0" prefHeight="200.0" prefWidth="318.0">
+          <columns>
+            <TableColumn prefWidth="112.0" text="KundenID">
+              <cellValueFactory>
+                <PropertyValueFactory property="customerId" />
+              </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="131.0" text="Kunde">
+              <cellValueFactory>
+                <PropertyValueFactory property="customerName" />
+              </cellValueFactory>
+            </TableColumn>
+          </columns>
+        </TableView>
+        <Button id="addorder" defaultButton="true" layoutX="474.0" layoutY="790.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
+        <Label layoutX="350.0" layoutY="574.0" text="Kunde:" />
+        <Button id="addcustomer" defaultButton="true" layoutX="350.0" layoutY="614.0" mnemonicParsing="false" onAction="#clickaddcust" text="Auswählen" />
+        <Label fx:id="lbcustomer" layoutX="411.0" layoutY="574.0" text="" />
       </children>
     </Pane>
   </top>

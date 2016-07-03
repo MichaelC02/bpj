@@ -4,12 +4,15 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.text.DateFormat;
+import java.util.Calendar;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -243,9 +246,30 @@ class DBConnect
 		return ++orderid;
 	}
 	
+	static ObservableList<customer> get_custs() throws SQLException
+	{
+		conn = GetConnection();
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"select customerId, customerName "
+				+ "from customers "
+				);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		ObservableList<customer> customer = FXCollections.observableArrayList();
+		while (rs.next())
+		{
+			customer.add(new customer( rs.getInt("customerId"),
+									   rs.getString("customerName")));
+	    }
+	
+		return customer;
+	}
+	
 	
 	//Matteo neu
-	static boolean neworder(ObservableList<Article> articles)
+	static boolean neworder(ObservableList<Article> articles, int custId)
 	{
 		Article article;
 		try
@@ -254,6 +278,16 @@ class DBConnect
 			
 			int orderid = get_max_orderid();
 			String ordid = Integer.toString(orderid);
+			
+			PreparedStatement ps = conn.prepareStatement("Insert Into orders (orderId, state, date, userId, customerId) Values(?, Offen, ?, ?, ?)");
+			ps.setString(1, ordid);
+			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			//Date date = (java.sql.Date) Calendar.getInstance().getTime();
+			ps.setDate(2, date);
+			ps.setInt(3, CurrentUser.getUserId());
+			ps.setInt(4, custId);
+			
+			ps.executeQuery();
 			
 			for(int row = 0; row < articles.size(); row++)
 			{
@@ -265,16 +299,15 @@ class DBConnect
 				int quan = article.getQuantity();
 				String quantity = Integer.toString(quan);
 			
-			
-		    
-			
-				PreparedStatement ps = conn.prepareStatement("Insert Into order Set order_id = ? and article_id = ? and price = ? and quantity = ?");
+				ps = conn.prepareStatement("Insert Into order_article Set order_id = ? and article_id = ? and price = ? and quantity = ?");
 				ps.setString(1, ordid);
 				ps.setString(2, articleid);
-				ps.setString(1, price);
-				ps.setString(2, quantity);
+				ps.setString(3, price);
+				ps.setString(4, quantity);
 				
 			    ps.executeQuery();
+			    
+			    
 				
 			
 			//return rs.getInt(1) == 1;
