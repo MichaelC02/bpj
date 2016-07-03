@@ -5,33 +5,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UC6_OrderDetailsController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC6_OrderDetailsController">
   <center>
     <Pane prefHeight="550.0" prefWidth="620.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="41.0" layoutY="29.0" text="Bestellnummer:" />
-            <Label layoutX="293.0" layoutY="29.0" text="KundenID:" />
-            <Label layoutX="293.0" layoutY="50.0" text="UserID:" />
-            <Label layoutX="41.0" layoutY="71.0" text="Status:" />
-            <Label layoutX="41.0" layoutY="50.0" text="Datum:" />
-            <Label fx:id="lblOrderID" layoutX="153.0" layoutY="29.0" text="Label" />
-            <Label fx:id="lblDate" layoutX="99.0" layoutY="50.0" text="Label" />
-            <Label fx:id="lblState" layoutX="99.0" layoutY="71.0" text="Label" />
-            <Label fx:id="lblCustID" layoutX="370.0" layoutY="29.0" text="Label" />
-            <Label fx:id="lblUserID" layoutX="344.0" layoutY="50.0" text="Label" />
-            <Label layoutX="41.0" layoutY="115.0" text="Artikel" />
-            <TableView fx:id="ArticleList" layoutX="34.0" layoutY="136.0" prefHeight="344.0" prefWidth="553.0">
-              <columns>
-                <TableColumn prefWidth="50.0" text="Pos" />
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="150.0" text="Bezeichnung" />
-                <TableColumn prefWidth="75.0" text="Stueck" />
-                <TableColumn prefWidth="100.0" text="Preis/Stueck" />
-                <TableColumn prefWidth="100.0" text="Gesamtpreis" />
-              </columns>
-            </TableView>
-            <Button layoutX="504.0" layoutY="494.0" mnemonicParsing="false" text="Zurück" onAction="#clickBack" />
-         </children>
+      <children>
+        <Label layoutX="41.0" layoutY="29.0" text="Bestellnummer:" />
+        <Label layoutX="293.0" layoutY="29.0" text="KundenID:" />
+        <Label layoutX="293.0" layoutY="50.0" text="UserID:" />
+        <Label layoutX="41.0" layoutY="71.0" text="Status:" />
+        <Label layoutX="41.0" layoutY="50.0" text="Datum:" />
+        <Label fx:id="lblOrderID" layoutX="153.0" layoutY="29.0" text="Label" />
+        <Label fx:id="lblDate" layoutX="99.0" layoutY="50.0" text="Label" />
+        <Label fx:id="lblState" layoutX="99.0" layoutY="71.0" text="Label" />
+        <Label fx:id="lblCustID" layoutX="370.0" layoutY="29.0" text="Label" />
+        <Label fx:id="lblUserID" layoutX="344.0" layoutY="50.0" text="Label" />
+        <Label layoutX="41.0" layoutY="115.0" text="Artikel" />
+        <TableView fx:id="ArticleList" layoutX="34.0" layoutY="136.0" prefHeight="344.0" prefWidth="553.0">
+          <columns>
+            <TableColumn prefWidth="50.0" text="Pos" />
+            <TableColumn prefWidth="75.0" text="ID" />
+            <TableColumn prefWidth="150.0" text="Bezeichnung" />
+            <TableColumn prefWidth="75.0" text="Stueck" />
+            <TableColumn prefWidth="100.0" text="Preis/Stueck" />
+            <TableColumn prefWidth="100.0" text="Gesamtpreis" />
+          </columns>
+        </TableView>
+        <Button layoutX="512.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickBack" text="Zurück" />
+        <Button fx:id="btcancel" layoutX="399.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickcancelorder" text="Stornieren" />
+      </children>
     </Pane>
   </center>
 </BorderPane>

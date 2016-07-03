@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Button;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -7,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +27,9 @@ public class UC6_OrderDetailsController {
 	@FXML private Label lblDate;
 	@FXML private Label lblUserID;
 	@FXML private Label lblCustID;
+	@FXML private Button btcancel;
+	
+	Order curr_order;
 	
 	public void loadOrder(Order currentOrder)
 	{
@@ -32,6 +38,31 @@ public class UC6_OrderDetailsController {
 		lblDate.setText(String.valueOf(currentOrder.getDate()));
 		lblUserID.setText(String.valueOf(currentOrder.getUsername()));
 		lblCustID.setText(String.valueOf(currentOrder.getCustomerName()));
+		curr_order = currentOrder;
+	}
+	
+	@FXML
+	public void initialize()
+	{
+		String state = curr_order.getState();
+		
+		if(state == "Offen")
+		{
+			btcancel.setEnabled(true);
+		}
+		else
+		{
+			btcancel.setEnabled(false);
+		}
+	}
+	
+	@FXML 
+	public void clickcancelorder()
+	{
+		
+		String message = "Wollen Sie den Vorgang wirklich stornieren?";
+		JOptionPane.showConfirmDialog(null, message, "Stornierung bestätigen", JOptionPane.YES_NO_CANCEL_OPTION);
+		return;
 	}
 
 	@FXML
