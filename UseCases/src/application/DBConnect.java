@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -277,35 +278,33 @@ class DBConnect
 			conn = GetConnection();
 			
 			int orderid = get_max_orderid();
-			String ordid = Integer.toString(orderid);
 			
-			PreparedStatement ps = conn.prepareStatement("Insert Into orders (orderId, state, date, userId, customerId) Values(?, Offen, ?, ?, ?)");
-			ps.setString(1, ordid);
-			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			//Date date = (java.sql.Date) Calendar.getInstance().getTime();
-			ps.setDate(2, date);
-			ps.setInt(3, CurrentUser.getUserId());
-			ps.setInt(4, custId);
+			int userid = CurrentUser.getUserId();
 			
-			ps.executeQuery();
+			PreparedStatement ps = conn.prepareStatement("insert into orders (orderId, state, date, userId, customerId) values (?, 'Offen', sysdate(), ?, ?)");
+			ps.setInt(1, orderid);
+			ps.setInt(2, userid);
+			ps.setInt(3, custId);
+			
+			Boolean dummy = ps.execute();
 			
 			for(int row = 0; row < articles.size(); row++)
 			{
 				article = articles.get(row);
 				int art_id = article.getArticleID();
-				String articleid = Integer.toString(art_id);
-				int pric = article.getPrice();
-				String price = Integer.toString(pric);
-				int quan = article.getQuantity();
-				String quantity = Integer.toString(quan);
-			
-				ps = conn.prepareStatement("Insert Into order_article Set order_id = ? and article_id = ? and price = ? and quantity = ?");
-				ps.setString(1, ordid);
-				ps.setString(2, articleid);
-				ps.setString(3, price);
-				ps.setString(4, quantity);
 				
-			    ps.executeQuery();
+				int pric = article.getPrice();
+				
+				int quan = article.getQuantity();
+				
+			
+				ps = conn.prepareStatement("insert into order_article (order_id, article_id, price, quantity) values(?, ?, ?, ?)");
+				ps.setInt(1, orderid);
+				ps.setInt(2, art_id);
+				ps.setInt(3, pric);
+				ps.setInt(4, quan);
+				
+				Boolean dummy2 = ps.execute();
 			    
 			    
 				

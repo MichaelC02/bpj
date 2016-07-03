@@ -68,6 +68,17 @@ public class OrdersOverviewController
 		//((TableColumn)columns.get(1)).setCellValueFactory(new PropertyValueFactory("test"));
 	}
 	
+	@FXML 
+	public void clickaddorder() throws IOException
+	{
+		// Bestellung erstellen Maske
+		Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("UC2_Bestellungsaufgabe.fxml"));
+		Scene scene = new Scene(windowOrderOverview);
+		Stage stage = (Stage)ordersTable.getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Bestellungsaufgabe");
+		stage.show();
+	}
 	
 	@FXML
 	public void clickLogout() throws IOException

@@ -37,8 +37,20 @@ public class UC2_BestellungsaufgabeController
 	int quant;
 	String error_msg;
 	Boolean error = false;
+	Boolean save = false;
 	Article selarticle;
 	int cust_id;
+	
+	@FXML
+	public void clickcancel() throws SQLException, IOException
+	{
+		Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
+		Scene scene = new Scene(windowOrderOverview);
+		Stage stage = (Stage)txtquantity.getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Bestellübersicht");
+		stage.show();
+	}
 	
 	@FXML
 	public void clickaddorder() throws SQLException, IOException
@@ -46,18 +58,34 @@ public class UC2_BestellungsaufgabeController
 		error = false;
 		ObservableList<Article> allarticles;
 		allarticles = table.getItems();
+		article_id = txtarticle_id.getText();		
+		article_name = txtarticle_name.getText();	
+		quantity = txtquantity.getText();
+				
+		boolean lv_valid;
 		
-		error = DBConnect.neworder(allarticles, cust_id);
-		if(error == false)
+		lv_valid = validate_order();
+		
+		
+		if(lv_valid  == true)
 		{
-			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
-			Scene scene = new Scene(windowOrderOverview);
-			Stage stage = (Stage)txtquantity.getScene().getWindow();
-			stage.setScene(scene);
-			stage.setTitle("Bestellübersicht");
-			stage.show();
+			save = DBConnect.neworder(allarticles, cust_id);
+			if(save == true)
+			{
+				Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
+				Scene scene = new Scene(windowOrderOverview);
+				Stage stage = (Stage)txtquantity.getScene().getWindow();
+				stage.setScene(scene);
+				stage.setTitle("Bestellübersicht");
+				stage.show();
+			}
+			else
+			{
+				lblErrorMsg.setVisible(true);
+				lblErrorMsg.setText("");
+				lblErrorMsg.setText("Fehler beim Speichern");
+			}
 		}
-		
 		return;
 	}
 	
@@ -136,9 +164,18 @@ public class UC2_BestellungsaufgabeController
 	{
 		customer customer;
 		customer = dbcust.getSelectionModel().getSelectedItem();
-		
-		lbcustomer.setText(customer.getCustomerName());
-		cust_id = customer.getCustomerId();
+		lblErrorMsg.setVisible(false);
+		lblErrorMsg.setText("");
+		if(customer == null)
+		{
+			lblErrorMsg.setVisible(true);
+			lblErrorMsg.setText("W�hlen Sie einen Kunden aus!");
+		}
+		else
+		{
+			lbcustomer.setText(customer.getCustomerName());
+			cust_id = customer.getCustomerId();
+		}
 	}
 	
 	@FXML
@@ -186,6 +223,37 @@ public class UC2_BestellungsaufgabeController
 			txtarticle_name.setText(selarticle.getName());
 		    
 		});
+	}
+	
+	public boolean validate_order()
+	{
+		error = false;
+		error_msg = "";
+		if(table.getItems().size() == 0)
+		{
+		   error = true;
+		   error_msg = "Erfassen Sie zumindest einen Artikel!\n";
+		}
+		
+		if(lbcustomer.getText().equals(""))
+		{
+			error = true;
+			error_msg += "Erfassen Sie einen Kunden!";
+		}
+		
+		if(error == true)
+		{
+			lblErrorMsg.setVisible(true);
+			lblErrorMsg.setText(error_msg);
+			return false;
+			
+		}
+		else
+		{
+			lblErrorMsg.setVisible(false);
+			lblErrorMsg.setText("");
+			return true;
+		}
 	}
 	
 	public boolean validate( )
