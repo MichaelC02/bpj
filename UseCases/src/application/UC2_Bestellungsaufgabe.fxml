@@ -7,27 +7,9 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.cell.TreeItemPropertyValueFactory?>
 
-<<<<<<< HEAD
-<BorderPane prefHeight="762.0" prefWidth="610.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
-  <bottom>
-=======
-<<<<<<< HEAD
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
-  <right>
-    <Pane prefHeight="531.0" prefWidth="573.0" BorderPane.alignment="CENTER">
-      <children>
-        <Button id="addorder" defaultButton="true" layoutX="437.0" layoutY="485.0" mnemonicParsing="false" onAction="#clickaddorder" text="Hinzufügen" />
-        <TextField fx:id="order_id" editable="false" layoutX="134.0" layoutY="27.0" />
-        <TextField fx:id="article" editable="false" layoutX="134.0" layoutY="67.0" />
-        <Label layoutX="10.0" layoutY="33.0" text="Bestellnummer:" />
-        <TextField fx:id="article" editable="false" layoutX="133.0" layoutY="109.0" />
-        <Label layoutX="9.0" layoutY="109.0" text="Status:" />
-        <Label layoutX="10.0" layoutY="70.0" text="Erfasser:" />
-        <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="214.0" prefHeight="216.0" prefWidth="545.0">
-=======
+
 <BorderPane prefHeight="836.0" prefWidth="610.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC2_BestellungsaufgabeController">
   <top>
->>>>>>> branch 'master' of https://github.com/MichaelC02/bpj
     <Pane prefHeight="836.0" prefWidth="610.0" BorderPane.alignment="CENTER">
       <children>
         <Label fx:id="lbcreator" layoutX="76.0" layoutY="15.0" />
@@ -35,7 +17,6 @@
         <Label layoutX="10.0" layoutY="39.0" text="Status:" />
         <Label layoutX="10.0" layoutY="15.0" text="Erfasser:" />
         <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="312.0" prefHeight="216.0" prefWidth="545.0">
->>>>>>> origin/master
           <columns>
             <TableColumn prefWidth="89.0" text="Artikel ID">
               <cellValueFactory>
@@ -57,19 +38,6 @@
                 <PropertyValueFactory property="price" />
               </cellValueFactory>
             </TableColumn>
-<<<<<<< HEAD
-            <TableColumn prefWidth="129.0" text="Gesamtpreis" />
-          </columns>
-        </TableView>
-        <TextField fx:id="txtquantity" layoutX="240.0" layoutY="175.0" prefWidth="74.0" />
-        <TextField fx:id="txtarticle_name" layoutX="107.0" layoutY="175.0" prefWidth="132.0" />
-        <Button id="addarticle" layoutX="349.0" layoutY="175.0" mnemonicParsing="false" onAction="#clickaddarticle" text="Artikel hinzufügen" />
-        <TextField fx:id="txtarticle_id" layoutX="14.0" layoutY="175.0" prefWidth="93.0" />
-        <Label fx:id="lblErrorMsg" layoutX="15.0" layoutY="149.0" text="" textFill="RED" />
-      </children>
-    </Pane>
-  </right>
-=======
             <TableColumn text="Gesamtpreis">
               <cellValueFactory>
                 <PropertyValueFactory property="totprice" />
@@ -123,10 +91,5 @@
         <Button layoutX="470.0" layoutY="715.0" mnemonicParsing="false" onAction="#clickcancel" text="Abbrechen" />
       </children>
     </Pane>
-<<<<<<< HEAD
-  </bottom>
-=======
   </top>
->>>>>>> origin/master
->>>>>>> branch 'master' of https://github.com/MichaelC02/bpj
 </BorderPane>
