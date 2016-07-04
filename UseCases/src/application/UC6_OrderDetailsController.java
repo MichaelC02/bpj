@@ -16,9 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class UC6_OrderDetailsController {
@@ -80,7 +78,7 @@ public class UC6_OrderDetailsController {
 		int yesno;
 		boolean save;
 		String message = "Wollen Sie den Vorgang wirklich stornieren?";
-		yesno = JOptionPane.showConfirmDialog(null, message, "Stornierung bestätigen", JOptionPane.YES_NO_CANCEL_OPTION);
+		yesno = JOptionPane.showConfirmDialog(null, message, "Stornierung bestï¿½tigen", JOptionPane.YES_NO_CANCEL_OPTION);
 		if(yesno == 0)
 		{
 			save = DBConnect.setStatus(curr_order.getOrderId(), "Storniert");

@@ -10,9 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 
 import javafx.collections.FXCollections;
@@ -279,7 +276,7 @@ class DBConnect
 			ps.setInt(2, orderId);
 			
 			
-			Boolean dummy2 = ps.execute();
+			Boolean dummy = ps.execute();
 			return true;
 		}
 		catch (SQLException e)
@@ -324,7 +321,7 @@ class DBConnect
 				ps.setInt(3, pric);
 				ps.setInt(4, quan);
 				
-				Boolean dummy2 = ps.execute();
+				dummy = ps.execute();
 			    
 			    
 				

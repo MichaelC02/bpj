@@ -3,20 +3,17 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class UC2_BestellungsaufgabeController
+public class UC3_BestellungsaufgabeController
 {
 	@FXML private Label lbcreator;
 	@FXML private Label lbstate;
@@ -169,7 +166,7 @@ public class UC2_BestellungsaufgabeController
 		if(customer == null)
 		{
 			lblErrorMsg.setVisible(true);
-			lblErrorMsg.setText("Wählen Sie einen Kunden aus!");
+			lblErrorMsg.setText("Wï¿½hlen Sie einen Kunden aus!");
 		}
 		else
 		{

@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -72,7 +71,7 @@ public class OrdersOverviewController
 	public void clickaddorder() throws IOException
 	{
 		// Bestellung erstellen Maske
-		Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("UC2_Bestellungsaufgabe.fxml"));
+		Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("UC3_Bestellungsaufgabe.fxml"));
 		Scene scene = new Scene(windowOrderOverview);
 		Stage stage = (Stage)ordersTable.getScene().getWindow();
 		stage.setScene(scene);
