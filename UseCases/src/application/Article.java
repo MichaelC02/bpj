@@ -6,16 +6,24 @@ public class Article {
 	private int articleID;
 	private int price;
 	private int quantity;
-	private int totprice;
-	
+	private int pos;
+		
 	public Article(String name, int articleID, int price, int quantity) {
 		this.name = name;
 		this.articleID = articleID;
 		this.price = price;
 		this.quantity = quantity;
-		this.totprice = price * quantity;
+		this.pos = 0;
 	}
 	
+	public int getPos() {
+		return pos;
+	}
+
+	public void setPos(int pos) {
+		this.pos = pos;
+	}
+
 	public int getQuantity() {
 		return quantity;
 	}
@@ -44,13 +52,7 @@ public class Article {
 	}
 
 	public int getTotprice() {
-		return totprice;
+		return quantity * price;
 	}
-
-	public void setTotprice(int totprice) {
-		this.totprice = totprice;
-	}
-	
-	
 	
 }

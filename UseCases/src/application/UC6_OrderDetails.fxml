@@ -4,10 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC6_OrderDetailsController">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UC6_OrderDetailsController">
   <center>
-    <Pane prefHeight="550.0" prefWidth="620.0" BorderPane.alignment="CENTER">
+    <Pane fx:id="btStorno" prefHeight="550.0" prefWidth="620.0" BorderPane.alignment="CENTER">
       <children>
         <Label layoutX="41.0" layoutY="29.0" text="Bestellnummer:" />
         <Label layoutX="293.0" layoutY="29.0" text="KundenID:" />
@@ -22,15 +23,39 @@
         <Label layoutX="41.0" layoutY="115.0" text="Artikel" />
         <TableView fx:id="ArticleList" layoutX="34.0" layoutY="136.0" prefHeight="344.0" prefWidth="553.0">
           <columns>
-            <TableColumn prefWidth="50.0" text="Pos" />
-            <TableColumn prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="150.0" text="Bezeichnung" />
-            <TableColumn prefWidth="75.0" text="Stueck" />
-            <TableColumn prefWidth="100.0" text="Preis/Stueck" />
-            <TableColumn prefWidth="100.0" text="Gesamtpreis" />
+            <TableColumn prefWidth="50.0" text="Pos" >
+              <cellValueFactory>
+                <PropertyValueFactory property="pos" />
+              </cellValueFactory>
+            </TableColumn>        
+            <TableColumn prefWidth="75.0" text="ID" >
+              <cellValueFactory>
+                <PropertyValueFactory property="articleID" />
+              </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="150.0" text="Bezeichnung" >
+              <cellValueFactory>
+                <PropertyValueFactory property="name" />
+              </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="75.0" text="Stueck" >
+              <cellValueFactory>
+                <PropertyValueFactory property="quantity" />
+              </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="Preis/Stueck" >
+              <cellValueFactory>
+                <PropertyValueFactory property="price" />
+              </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="Gesamtpreis" >
+              <cellValueFactory>
+                <PropertyValueFactory property="totprice" />
+              </cellValueFactory>
+            </TableColumn>
           </columns>
         </TableView>
-        <Button layoutX="512.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickBack" text="Zurück" />
+        <Button layoutX="512.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickBack" text="Zurueck" />
         <Button fx:id="btcancel" layoutX="399.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickcancelorder" text="Stornieren" />
       </children>
     </Pane>

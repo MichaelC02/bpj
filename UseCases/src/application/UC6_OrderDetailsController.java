@@ -1,6 +1,5 @@
 package application;
 
-import java.awt.Button;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -15,8 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,6 +29,7 @@ public class UC6_OrderDetailsController {
 	@FXML private Label lblUserID;
 	@FXML private Label lblCustID;
 	@FXML private Button btcancel;
+	@FXML private TableView<Article> ArticleList;
 	
 	Order curr_order;
 	
@@ -38,22 +40,38 @@ public class UC6_OrderDetailsController {
 		lblDate.setText(String.valueOf(currentOrder.getDate()));
 		lblUserID.setText(String.valueOf(currentOrder.getUsername()));
 		lblCustID.setText(String.valueOf(currentOrder.getCustomerName()));
-		curr_order = currentOrder;
+		try {
+			curr_order = DBConnect.GetOrderById(currentOrder.getOrderId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			curr_order = null;
+			return;
+		}
+		
+		String state = curr_order.getState();
+		if(state.equals("Offen") == true)
+		{
+			btcancel.setVisible(true);
+		}
+		else
+		{
+			btcancel.setVisible(false);
+		}
+		System.out.println("TEST");
+		if(curr_order.getArticleList() != null){
+			System.out.println("TEST2");
+			for(int i = 0; i < curr_order.getArticleList().size(); i++){
+				curr_order.getArticleList().get(i).setPos(i+1);
+			}
+			ArticleList.getItems().addAll(curr_order.getArticleList());
+		}
+		System.out.println("TEST");
 	}
 	
 	@FXML
 	public void initialize()
-	{
-		String state = curr_order.getState();
-		
-		if(state == "Offen")
-		{
-			btcancel.setEnabled(true);
-		}
-		else
-		{
-			btcancel.setEnabled(false);
-		}
+	{		
 	}
 	
 	@FXML 
