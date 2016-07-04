@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -7,41 +8,41 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.cell.TreeItemPropertyValueFactory?>
 
-<BorderPane prefHeight="439.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.OrdersOverviewController">
+<BorderPane prefHeight="439.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OrdersOverviewController">
   <bottom>
-    <Pane prefHeight="115.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+    <Pane prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
-        <Button fx:id="btnNewUser" layoutX="312.0" layoutY="68.0" mnemonicParsing="false" onAction="#clickAddUser" text="Neuer User" />
-        <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="73.0" text="EIngeloggt als " />
-        <Button fx:id="btnLogout" cancelButton="true" layoutX="405.0" layoutY="68.0" mnemonicParsing="false" onAction="#clickLogout" prefHeight="27.0" prefWidth="87.0" text="Logout" />
-        <Button layoutX="312.0" layoutY="35.0" mnemonicParsing="false" onAction="#clickaddorder" text="Bestellung hinzufügen" />
+        <Button fx:id="btnNewUser" layoutX="273.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickAddUser" prefHeight="27.0" prefWidth="91.0" text="Neuer User" />
+        <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="26.0" text="EIngeloggt als " />
+        <Button fx:id="btnLogout" cancelButton="true" layoutX="495.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickLogout" prefHeight="27.0" prefWidth="91.0" text="Logout" />
+        <Button layoutX="371.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickaddorder" text="Neue Bestellung" />
       </children>
     </Pane>
   </bottom>
   <center>
     <TableView fx:id="ordersTable" editable="true" prefHeight="335.0" prefWidth="500.0" BorderPane.alignment="CENTER">
       <columns>
-        <TableColumn prefWidth="60.0" text="Nr.">
+        <TableColumn text="Nr.">
           <cellValueFactory>
             <PropertyValueFactory property="orderId" />
           </cellValueFactory>
         </TableColumn>
-        <TableColumn prefWidth="120.0" text="Datum">
+        <TableColumn prefWidth="130.0" text="Datum">
           <cellValueFactory>
             <PropertyValueFactory property="prettyDate" />
           </cellValueFactory>
         </TableColumn>
-        <TableColumn prefWidth="100.0" text="Benutzer">
+        <TableColumn prefWidth="130.0" text="Benutzer">
           <cellValueFactory>
             <PropertyValueFactory property="username" />
           </cellValueFactory>
         </TableColumn>
-        <TableColumn prefWidth="130.0" text="Kunde">
+        <TableColumn prefWidth="150.0" text="Kunde">
           <cellValueFactory>
             <PropertyValueFactory property="customerName" />
           </cellValueFactory>
         </TableColumn>
-        <TableColumn prefWidth="90.0" text="Status">
+        <TableColumn prefWidth="110.0" text="Status">
           <cellValueFactory>
             <PropertyValueFactory property="state" />
           </cellValueFactory>

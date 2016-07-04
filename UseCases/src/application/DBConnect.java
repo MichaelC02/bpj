@@ -153,7 +153,7 @@ class DBConnect
 		while (rs.next())
 		{
 			orders.add(new Order(rs.getInt("orderId"),
-								 rs.getDate("date"),
+								 new Date(rs.getTimestamp("date").getTime()),
 								 rs.getString("username"),
 								 rs.getString("customerName"),
 								 rs.getString("state")));
@@ -185,37 +185,20 @@ class DBConnect
 	}
 	
 	
-	static Order GetOrderById(int orderId) throws SQLException
+	public static Order GetArticles(Order currentOrder) throws SQLException
 	{
 		conn = GetConnection();
 		
+		
 		PreparedStatement ps = conn.prepareStatement(
-				"select date, username, customerName, state "
-				+ "from orders o "
-				+ "join user u on o.userId = u.userId "
-				+ "join customers c on o.customerId = c.customerId "
-				+ "where orderId = ?");
-		
-		ps.setInt(1, orderId);
-		
-		ResultSet rs = ps.executeQuery();
-		rs.first();
-		
-		Order currentOrder = new Order(orderId,
-							    	   rs.getDate("date"),
-									   rs.getString("username"),
-									   rs.getString("customerName"),
-									   rs.getString("state"));
-		
-		ps = conn.prepareStatement(
 				"select a.name, a.article_id, a.price, oa.quantity "
 				+ "from article a "
 				+ "join order_article oa on a.article_id = oa.article_id "
 				+ "where order_id = ?");
 		
-		ps.setInt(1, orderId);
+		ps.setInt(1, currentOrder.getOrderId());
 		
-		rs = ps.executeQuery();
+		ResultSet rs = ps.executeQuery();
 		
 		ObservableList<Article> articles = FXCollections.observableArrayList();
 		while (rs.next())

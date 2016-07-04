@@ -74,11 +74,12 @@ public class DBConnect_Test
 	}
 
 	@Test
-	public void testGetOrderById()
+	public void testGetArticles()
 	{
 		try
 		{
-			Assert.assertNotNull(DBConnect.GetOrderById(1));
+			Order o = new Order(1, null, null, null, null);
+			Assert.assertNotNull(DBConnect.GetArticles(o));
 		}
 		catch(SQLException e)
 		{

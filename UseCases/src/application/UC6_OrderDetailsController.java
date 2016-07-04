@@ -39,7 +39,7 @@ public class UC6_OrderDetailsController {
 		lblUserID.setText(String.valueOf(currentOrder.getUsername()));
 		lblCustID.setText(String.valueOf(currentOrder.getCustomerName()));
 		try {
-			curr_order = DBConnect.GetOrderById(currentOrder.getOrderId());
+			curr_order = DBConnect.GetArticles(currentOrder);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
