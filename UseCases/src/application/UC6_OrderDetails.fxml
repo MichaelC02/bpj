@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -23,32 +24,32 @@
         <Label layoutX="41.0" layoutY="115.0" text="Artikel" />
         <TableView fx:id="ArticleList" layoutX="34.0" layoutY="136.0" prefHeight="344.0" prefWidth="553.0">
           <columns>
-            <TableColumn prefWidth="50.0" text="Pos" >
+            <TableColumn prefWidth="50.0" text="Pos">
               <cellValueFactory>
                 <PropertyValueFactory property="pos" />
               </cellValueFactory>
             </TableColumn>        
-            <TableColumn prefWidth="75.0" text="ID" >
+            <TableColumn prefWidth="75.0" text="ID">
               <cellValueFactory>
                 <PropertyValueFactory property="articleID" />
               </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="150.0" text="Bezeichnung" >
+            <TableColumn prefWidth="150.0" text="Bezeichnung">
               <cellValueFactory>
                 <PropertyValueFactory property="name" />
               </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="75.0" text="Stueck" >
+            <TableColumn prefWidth="75.0" text="Stueck">
               <cellValueFactory>
                 <PropertyValueFactory property="quantity" />
               </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="Preis/Stueck" >
+            <TableColumn prefWidth="100.0" text="Preis/Stueck">
               <cellValueFactory>
                 <PropertyValueFactory property="price" />
               </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="Gesamtpreis" >
+            <TableColumn prefWidth="100.0" text="Gesamtpreis">
               <cellValueFactory>
                 <PropertyValueFactory property="totprice" />
               </cellValueFactory>
@@ -57,6 +58,7 @@
         </TableView>
         <Button layoutX="512.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickBack" text="Zurueck" />
         <Button fx:id="btcancel" layoutX="399.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickcancelorder" text="Stornieren" />
+            <Button fx:id="btEdit" layoutX="295.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickEditOrder" text="Bearbeiten" />
       </children>
     </Pane>
   </center>

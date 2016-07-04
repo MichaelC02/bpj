@@ -27,6 +27,7 @@ public class UC6_OrderDetailsController {
 	@FXML private Label lblUserID;
 	@FXML private Label lblCustID;
 	@FXML private Button btcancel;
+	@FXML private Button btEdit;
 	@FXML private TableView<Article> ArticleList;
 	
 	Order curr_order;
@@ -51,14 +52,15 @@ public class UC6_OrderDetailsController {
 		if(state.equals("Offen") == true)
 		{
 			btcancel.setVisible(true);
+			btEdit.setVisible(true);
 		}
 		else
 		{
 			btcancel.setVisible(false);
+			btEdit.setVisible(false);
 		}
-		System.out.println("TEST");
+		
 		if(curr_order.getArticleList() != null){
-			System.out.println("TEST2");
 			for(int i = 0; i < curr_order.getArticleList().size(); i++){
 				curr_order.getArticleList().get(i).setPos(i+1);
 			}
@@ -88,6 +90,29 @@ public class UC6_OrderDetailsController {
 				lblState.setText("Storniert");
 			}
 		}
+		
+		return;
+	}
+	
+	@FXML 
+	public void clickEditOrder() throws SQLException
+	{
+		try
+		{
+			// Order-ID übergeben
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("UC4_EditOrder.fxml"));
+			Parent windowOrderOverview = loader.load();
+			
+			UC3_BestellungsaufgabeController con = loader.<application.UC3_BestellungsaufgabeController>getController();
+			//con.loadOrder(curr_order);
+			
+			Scene scene = new Scene(windowOrderOverview);
+			Stage stage = (Stage)ArticleList.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Bestellung bearbeiten");
+			stage.show();
+		}
+		catch (IOException e) { e.printStackTrace(); }
 		
 		return;
 	}

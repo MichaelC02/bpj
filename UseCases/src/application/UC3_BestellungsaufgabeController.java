@@ -38,6 +38,10 @@ public class UC3_BestellungsaufgabeController
 	Article selarticle;
 	int cust_id;
 	
+	public void loadOrder(Order currentOrder){
+		
+	}
+	
 	@FXML
 	public void clickcancel() throws SQLException, IOException
 	{
