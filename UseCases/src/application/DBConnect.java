@@ -269,7 +269,25 @@ class DBConnect
 	}
 	
 	
-	
+	static boolean setStatus(int orderId, String status) throws SQLException
+	{
+		try
+		{
+			conn = GetConnection();
+			PreparedStatement ps = conn.prepareStatement("update orders set state = ? where orderId = ?");
+			ps.setString(1, status);
+			ps.setInt(2, orderId);
+			
+			
+			Boolean dummy2 = ps.execute();
+			return true;
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	//Matteo neu
 	static boolean neworder(ObservableList<Article> articles, int custId)

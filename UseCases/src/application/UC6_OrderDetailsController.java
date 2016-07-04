@@ -75,11 +75,22 @@ public class UC6_OrderDetailsController {
 	}
 	
 	@FXML 
-	public void clickcancelorder()
+	public void clickcancelorder() throws SQLException
 	{
-		
+		int yesno;
+		boolean save;
 		String message = "Wollen Sie den Vorgang wirklich stornieren?";
-		JOptionPane.showConfirmDialog(null, message, "Stornierung bestätigen", JOptionPane.YES_NO_CANCEL_OPTION);
+		yesno = JOptionPane.showConfirmDialog(null, message, "Stornierung bestätigen", JOptionPane.YES_NO_CANCEL_OPTION);
+		if(yesno == 0)
+		{
+			save = DBConnect.setStatus(curr_order.getOrderId(), "Storniert");
+			if(save==true)
+			{
+				curr_order.setState("Storniert");
+				lblState.setText("Storniert");
+			}
+		}
+		
 		return;
 	}
 
