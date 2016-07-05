@@ -66,7 +66,6 @@ public class UC6_OrderDetailsController {
 			}
 			ArticleList.getItems().addAll(curr_order.getArticleList());
 		}
-		System.out.println("TEST");
 	}
 	
 	@FXML
@@ -100,11 +99,11 @@ public class UC6_OrderDetailsController {
 		try
 		{
 			// Order-ID übergeben
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("UC4_EditOrder.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("UC3_Bestellungsaufgabe.fxml"));
 			Parent windowOrderOverview = loader.load();
 			
 			UC3_BestellungsaufgabeController con = loader.<application.UC3_BestellungsaufgabeController>getController();
-			//con.loadOrder(curr_order);
+			con.loadOrder(curr_order);
 			
 			Scene scene = new Scene(windowOrderOverview);
 			Stage stage = (Stage)ArticleList.getScene().getWindow();

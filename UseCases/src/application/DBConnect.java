@@ -142,7 +142,7 @@ class DBConnect
 		conn = GetConnection();
 		
 		PreparedStatement ps = conn.prepareStatement(
-				"select orderId, date, username, customerName, state "
+				"select orderId, date, username, customerName, o.userId, o.customerId, state "
 				+ "from orders o "
 				+ "join user u on o.userId = u.userId "
 				+ "join customers c on o.customerId = c.customerId");
@@ -156,6 +156,8 @@ class DBConnect
 								 new Date(rs.getTimestamp("date").getTime()),
 								 rs.getString("username"),
 								 rs.getString("customerName"),
+								 rs.getInt("userid"),
+								 rs.getInt("customerId"),
 								 rs.getString("state")));
 	    }
 	
@@ -248,6 +250,37 @@ class DBConnect
 		return customer;
 	}
 	
+	static String getCustomerName(int custId) throws SQLException
+	{
+		conn = GetConnection();
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"select customerName "
+				+ "from customers "
+			    + "where customerId = ?"
+				);
+		ps.setInt(1, custId);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		return rs.getString("customerName");
+	}
+	
+	static String getUserName(int userId) throws SQLException
+	{
+		conn = GetConnection();
+		
+		PreparedStatement ps = conn.prepareStatement(
+				"select username "
+				+ "from user "
+			    + "where userId = ?"
+				);
+		ps.setInt(1, userId);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		return rs.getString("username");
+	}
 	
 	static boolean setStatus(int orderId, String status) throws SQLException
 	{
@@ -330,6 +363,56 @@ class DBConnect
 			e.printStackTrace();
 			return false;
 		}*/
+	}
+	
+	static boolean updateOrder(ObservableList<Article> articles, int custId, int orderId)
+	{
+		Article article;
+		try
+		{
+			conn = GetConnection();
+			
+			int userid = CurrentUser.getUserId();
+			
+			PreparedStatement ps = conn.prepareStatement("Update orders set date = sysdate(), userId = ?, customerId = ? where orderId = ?");
+			ps.setInt(1, userid);
+			ps.setInt(2, custId);
+			ps.setInt(3, orderId);
+			
+			Boolean dummy = ps.execute();
+			
+			ps = conn.prepareStatement("delete from order_article where order_id = ?");
+			ps.setInt(1, orderId);
+			
+			dummy = ps.execute();
+			
+			for(int row = 0; row < articles.size(); row++)
+			{
+				article = articles.get(row);
+				int art_id = article.getArticleID();
+				
+				int pric = article.getPrice();
+				
+				int quan = article.getQuantity();
+				
+			
+				ps = conn.prepareStatement("insert into order_article (order_id, article_id, price, quantity) values(?, ?, ?, ?)");
+				ps.setInt(1, orderId);
+				ps.setInt(2, art_id);
+				ps.setInt(3, pric);
+				ps.setInt(4, quan);
+				
+				dummy = ps.execute();
+
+			}
+			
+			return true;
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 
