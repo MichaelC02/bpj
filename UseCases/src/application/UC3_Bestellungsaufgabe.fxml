@@ -6,18 +6,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.cell.TreeItemPropertyValueFactory?>
-
-
-
-<BorderPane prefHeight="836.0" prefWidth="610.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC3_BestellungsaufgabeController">
-  <top>
-    <Pane prefHeight="836.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+<BorderPane prefHeight="643.0" prefWidth="591.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.UC3_BestellungsaufgabeController">
+  <right>
+    <Pane prefHeight="836.0" prefWidth="898.9998779296875" BorderPane.alignment="CENTER">
       <children>
         <Label fx:id="lbcreator" layoutX="76.0" layoutY="15.0" />
         <Label fx:id="lbstate" layoutX="76.0" layoutY="39.0" />
         <Label layoutX="10.0" layoutY="39.0" text="Status:" />
         <Label layoutX="10.0" layoutY="15.0" text="Erfasser:" />
-        <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="312.0" prefHeight="216.0" prefWidth="545.0">
+        <TableView fx:id="table" editable="true" layoutX="15.0" layoutY="363.0" prefHeight="216.0" prefWidth="545.0">
           <columns>
             <TableColumn prefWidth="89.0" text="Artikel ID">
               <cellValueFactory>
@@ -39,20 +36,20 @@
                 <PropertyValueFactory property="price" />
               </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Gesamtpreis">
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="121.0" text="Gesamtpreis">
               <cellValueFactory>
                 <PropertyValueFactory property="totprice" />
               </cellValueFactory>
             </TableColumn>
           </columns>
         </TableView>
-        <TextField fx:id="txtquantity" layoutX="245.0" layoutY="278.0" prefWidth="74.0" />
-        <TextField fx:id="txtarticle_name" editable="false" layoutX="110.0" layoutY="278.0" prefWidth="132.0" />
-        <Button id="addarticle" layoutX="331.0" layoutY="278.0" mnemonicParsing="false" onAction="#clickaddarticle" text="Hinzufügen" />
-        <Button id="delarticle" layoutX="410.0" layoutY="278.0" mnemonicParsing="false" onAction="#clickdelarticle" text="Entfernen" />
-        <TextField fx:id="txtarticle_id" editable="false" layoutX="14.0" layoutY="278.0" prefWidth="93.0" />
+        <TextField fx:id="txtquantity" layoutX="245.0" layoutY="327.0" prefWidth="74.0" />
+        <TextField fx:id="txtarticle_name" editable="false" layoutX="110.0" layoutY="327.0" prefWidth="132.0" />
+        <Button id="addarticle" layoutX="331.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickaddarticle" text="Hinzufügen" />
+        <Button id="delarticle" layoutX="456.0" layoutY="327.0" mnemonicParsing="false" onAction="#clickdelarticle" text="Entfernen" />
+        <TextField fx:id="txtarticle_id" editable="false" layoutX="14.0" layoutY="327.0" prefWidth="93.0" />
         <Label fx:id="lblErrorMsg" layoutX="300.0" layoutY="15.0" text="" textFill="RED" />
-        <TableView fx:id="dbtable" editable="true" layoutX="15.0" layoutY="63.0" prefHeight="200.0" prefWidth="335.0">
+        <TableView fx:id="dbtable" editable="true" layoutX="15.0" layoutY="116.0" prefHeight="200.0" prefWidth="316.0">
           <columns>
             <TableColumn prefWidth="92.0" text="ArtikelID">
               <cellValueFactory>
@@ -71,26 +68,26 @@
             </TableColumn>
           </columns>
         </TableView>
-        <TableView fx:id="dbcust" layoutX="15.0" layoutY="545.0" prefHeight="200.0" prefWidth="318.0">
+        <TableView fx:id="dbcust" layoutX="364.0" layoutY="116.0" prefHeight="200.0" prefWidth="196.0">
           <columns>
-            <TableColumn prefWidth="112.0" text="KundenID">
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="47.0" text="ID">
               <cellValueFactory>
                 <PropertyValueFactory property="customerId" />
               </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="131.0" text="Kunde">
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="155.0" text="Kunde">
               <cellValueFactory>
                 <PropertyValueFactory property="customerName" />
               </cellValueFactory>
             </TableColumn>
           </columns>
         </TableView>
-        <Button id="addorder" defaultButton="true" layoutX="400.0" layoutY="715.0" mnemonicParsing="false" onAction="#clickaddorder" text="Speichern" />
-        <Label layoutX="353.0" layoutY="590.0" text="Kunde:" />
-        <Button id="addcustomer" defaultButton="true" layoutX="350.0" layoutY="614.0" mnemonicParsing="false" onAction="#clickaddcust" text="Kunde auswählen" />
-        <Label fx:id="lbcustomer" layoutX="411.0" layoutY="590.0" prefWidth="149.0" text="" />
-        <Button layoutX="470.0" layoutY="715.0" mnemonicParsing="false" onAction="#clickcancel" text="Abbrechen" />
+        <Button id="addorder" defaultButton="true" layoutX="331.0" layoutY="584.0" mnemonicParsing="false" onAction="#clickaddorder" text="Speichern" />
+        <Label layoutX="364.0" layoutY="15.0" text="Kunde:" />
+        <Button id="addcustomer" defaultButton="true" layoutX="390.0" layoutY="75.0" minHeight="23.94140625" mnemonicParsing="false" onAction="#clickaddcust" prefHeight="29.94140625" text="Kunde auswählen" />
+        <Label fx:id="lbcustomer" layoutX="435.0" layoutY="15.0" prefWidth="149.0" text="" />
+        <Button layoutX="443.0" layoutY="584.0" mnemonicParsing="false" onAction="#clickcancel" text="Abbrechen" />
       </children>
     </Pane>
-  </top>
+  </right>
 </BorderPane>
