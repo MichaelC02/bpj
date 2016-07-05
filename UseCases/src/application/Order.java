@@ -1,6 +1,5 @@
 package application;
 
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,20 +11,16 @@ public class Order
     private Date date;
     private String username;
     private String customerName;
-    private int userID;
-    private int customerID;
     private String state;
     private ObservableList<Article> ArticleList;
 
     
-	public Order(int _orderId, Date _date, String _username, String _customerName, int _userID, int _customerID, String _state)
+	public Order(int _orderId, Date _date, String _username, String _customerName, String _state)
     {
     	this.orderId = new Integer(_orderId);// SimpleIntegerProperty(_orderId);
         this.date = _date;
         this.username = new String(_username);
         this.customerName = new String(_customerName);
-        this.userID=_userID;
-        this.customerID=_customerID;
         this.state = new String(_state);
     }
 	
@@ -90,37 +85,6 @@ public class Order
 
 	public void setState(String state) {
 		this.state = state;
-	}
-	
-	public int getUserID() {
-		return userID;
-	}
-
-
-	public void setUserID(int userID) {
-		this.userID = userID;
-		try {
-			this.username = DBConnect.getUserName(userID);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-
-	public int getCustomerID() {
-		return customerID;
-	}
-
-
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
-		try {
-			this.customerName = DBConnect.getCustomerName(customerID);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
     
     

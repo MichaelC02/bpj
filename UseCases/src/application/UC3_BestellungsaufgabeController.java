@@ -37,19 +37,8 @@ public class UC3_BestellungsaufgabeController
 	Boolean save = false;
 	Article selarticle;
 	int cust_id;
-	private boolean editmode;
-	private int orderid;
 	
 	public void loadOrder(Order currentOrder){
-		if(currentOrder != null) {
-			table.getItems().addAll(currentOrder.getArticleList());		
-			lbcustomer.setText(currentOrder.getCustomerName());
-			cust_id = currentOrder.getCustomerID(); 
-			orderid=currentOrder.getOrderId();
-			lbstate.setText("In Bearbeitung");
-			System.out.println("test2");
-			editmode=true;
-		}
 		
 	}
 	
@@ -81,7 +70,7 @@ public class UC3_BestellungsaufgabeController
 		
 		if(lv_valid  == true)
 		{
-			save = (editmode == true) ? DBConnect.updateOrder(allarticles, cust_id, orderid) : DBConnect.neworder(allarticles, cust_id);
+			save = DBConnect.neworder(allarticles, cust_id);
 			if(save == true)
 			{
 				Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
@@ -198,9 +187,6 @@ public class UC3_BestellungsaufgabeController
 		
 		ObservableList<Article> articles = null;
 		ObservableList<customer> cust = null;
-		
-		System.out.println("test1");
-		editmode=false;
 		
 		try
 		{
