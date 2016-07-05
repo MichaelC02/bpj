@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -22,9 +25,10 @@ public class UC3_BestellungsaufgabeController
 	@FXML private TextField txtarticle_name;
 	@FXML private Label lbcustomer;
 	@FXML private Label lblErrorMsg;
-	@FXML private TableView<Article> table ;
-	@FXML private TableView<Article> dbtable ;
-	@FXML private TableView<customer> dbcust ;
+	@FXML private Button btnCancel;
+	@FXML private TableView<Article> table;
+	@FXML private TableView<Article> dbtable;
+	@FXML private TableView<customer> dbcust;
 	
 	
 	String article_name;
@@ -37,30 +41,61 @@ public class UC3_BestellungsaufgabeController
 	Boolean save = false;
 	Article selarticle;
 	int cust_id;
-	private boolean editmode;
 	private int orderid;
+	private Order editOrder = null;
 	
-	public void loadOrder(Order currentOrder){
-		if(currentOrder != null) {
+	public void loadOrder(Order currentOrder)
+	{
+		if(currentOrder != null)
+		{
 			table.getItems().addAll(currentOrder.getArticleList());		
 			lbcustomer.setText(currentOrder.getCustomerName());
 			cust_id = currentOrder.getCustomerID(); 
 			orderid=currentOrder.getOrderId();
 			lbstate.setText("In Bearbeitung");
-			editmode=true;
+			
+			editOrder = currentOrder;
+			btnCancel.setOnAction(new EventHandler<ActionEvent>()
+								  {@Override public void handle(ActionEvent e) { cancelUpdate(); }});
 		}
-		
 	}
 	
 	@FXML
-	public void clickcancel() throws SQLException, IOException
+	public void cancelInsert()
 	{
-		Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
-		Scene scene = new Scene(windowOrderOverview);
-		Stage stage = (Stage)txtquantity.getScene().getWindow();
-		stage.setScene(scene);
-		stage.setTitle("Bestellübersicht");
-		stage.show();
+		// Öffne Bestellübersicht-Maske
+		try
+		{
+			Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
+			Scene scene = new Scene(windowOrderOverview);
+			Stage stage = (Stage)txtquantity.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Bestellübersicht");
+			stage.show();
+		}
+		catch (IOException e) { e.printStackTrace(); }
+	}
+	
+	@FXML
+	public void cancelUpdate()
+	{
+		// Öffne Bestelldetails-Maske
+		try
+		{
+			// Order-ID übergeben
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("UC6_OrderDetails.fxml"));
+			Parent windowOrderOverview = loader.load();
+			
+			UC6_OrderDetailsController con = loader.<application.UC6_OrderDetailsController>getController();
+			con.loadOrder(editOrder);
+			
+			Scene scene = new Scene(windowOrderOverview);
+			Stage stage = (Stage)txtquantity.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Bestelldetails");
+			stage.show();
+		}
+		catch (IOException e) { e.printStackTrace(); }
 	}
 	
 	@FXML
@@ -80,7 +115,7 @@ public class UC3_BestellungsaufgabeController
 		
 		if(lv_valid  == true)
 		{
-			save = (editmode == true) ? DBConnect.updateOrder(allarticles, cust_id, orderid) : DBConnect.neworder(allarticles, cust_id);
+			save = (editOrder != null) ? DBConnect.updateOrder(allarticles, cust_id, orderid) : DBConnect.neworder(allarticles, cust_id);
 			if(save == true)
 			{
 				Parent windowOrderOverview = FXMLLoader.load(getClass().getResource("OrdersOverview.fxml"));
@@ -180,7 +215,7 @@ public class UC3_BestellungsaufgabeController
 		if(customer == null)
 		{
 			lblErrorMsg.setVisible(true);
-			lblErrorMsg.setText("W�hlen Sie einen Kunden aus!");
+			lblErrorMsg.setText("Wählen Sie einen Kunden aus!");
 		}
 		else
 		{
@@ -198,7 +233,9 @@ public class UC3_BestellungsaufgabeController
 		ObservableList<Article> articles = null;
 		ObservableList<customer> cust = null;
 		
-		editmode=false;
+		btnCancel.setOnAction(new EventHandler<ActionEvent>()
+		  					  {@Override public void handle(ActionEvent e) { cancelInsert(); }});
+		
 		
 		try
 		{

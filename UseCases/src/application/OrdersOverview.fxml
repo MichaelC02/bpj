@@ -13,7 +13,7 @@
     <Pane prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
         <Button fx:id="btnNewUser" layoutX="273.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickAddUser" prefHeight="27.0" prefWidth="91.0" text="Neuer User" />
-        <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="26.0" text="EIngeloggt als " />
+        <Label fx:id="lblLoggedInAs" layoutX="14.0" layoutY="20.0" text="EIngeloggt als " />
         <Button fx:id="btnLogout" cancelButton="true" layoutX="495.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickLogout" prefHeight="27.0" prefWidth="91.0" text="Logout" />
         <Button layoutX="371.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickaddorder" text="Neue Bestellung" />
       </children>

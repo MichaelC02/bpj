@@ -89,7 +89,7 @@
         <Label layoutX="353.0" layoutY="590.0" text="Kunde:" />
         <Button id="addcustomer" defaultButton="true" layoutX="350.0" layoutY="614.0" mnemonicParsing="false" onAction="#clickaddcust" text="Kunde auswählen" />
         <Label fx:id="lbcustomer" layoutX="411.0" layoutY="590.0" prefWidth="149.0" text="" />
-        <Button layoutX="470.0" layoutY="715.0" mnemonicParsing="false" onAction="#clickcancel" text="Abbrechen" />
+        <Button fx:id="btnCancel" layoutX="470.0" layoutY="715.0" mnemonicParsing="false" text="Abbrechen" />
       </children>
     </Pane>
   </top>

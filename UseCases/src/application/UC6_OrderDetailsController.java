@@ -1,26 +1,23 @@
 package application;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class UC6_OrderDetailsController {
-	
+public class UC6_OrderDetailsController
+{	
 	@FXML private Label lblOrderID;
 	@FXML private Label lblState;
 	@FXML private Label lblDate;
@@ -36,7 +33,7 @@ public class UC6_OrderDetailsController {
 	{
 		lblOrderID.setText(String.valueOf(currentOrder.getOrderId()));
 		lblState.setText(String.valueOf(currentOrder.getState()));
-		lblDate.setText(String.valueOf(currentOrder.getDate()));
+		lblDate.setText(String.valueOf(currentOrder.getPrettyDate()));
 		lblUserID.setText(String.valueOf(currentOrder.getUsername()));
 		lblCustID.setText(String.valueOf(currentOrder.getCustomerName()));
 		try {
@@ -68,29 +65,24 @@ public class UC6_OrderDetailsController {
 		}
 	}
 	
-	@FXML
-	public void initialize()
-	{		
-	}
-	
 	@FXML 
 	public void clickcancelorder() throws SQLException
 	{
-		int yesno;
-		boolean save;
-		String message = "Wollen Sie den Vorgang wirklich stornieren?";
-		yesno = JOptionPane.showConfirmDialog(null, message, "Stornierung best�tigen", JOptionPane.YES_NO_CANCEL_OPTION);
-		if(yesno == 0)
+		// MessageBox ausgeben
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("");
+		alert.setHeaderText("Storno bestätigen");
+		alert.setContentText("Wollen Sie diese Bestellung wirklich stornieren?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK)
 		{
-			save = DBConnect.setStatus(curr_order.getOrderId(), "Storniert");
-			if(save==true)
+			if(DBConnect.setStatus(curr_order.getOrderId(), "Storniert"))
 			{
 				curr_order.setState("Storniert");
 				lblState.setText("Storniert");
 			}
 		}
-		
-		return;
 	}
 	
 	@FXML 
@@ -112,8 +104,6 @@ public class UC6_OrderDetailsController {
 			stage.show();
 		}
 		catch (IOException e) { e.printStackTrace(); }
-		
-		return;
 	}
 
 	@FXML
