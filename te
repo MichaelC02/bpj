@@ -1,0 +1,2 @@
+
+git log --since='last month' --pretty=format:'%h;%an;%ad;%s' --author='Testt' > ~/log.csv
