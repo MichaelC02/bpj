@@ -61,6 +61,32 @@ public class DBConnect_Test
 	}
 	
 	@Test
+	public void testget_max_orderid()
+	{
+		try
+		{
+			Assert.assertNotNull(DBConnect.get_max_orderid());
+		}
+		catch (SQLException e)
+		{
+			fail();
+		}
+	}
+	
+	@Test
+	public void testget_custs()
+	{
+		try
+		{
+			Assert.assertNotNull(DBConnect.get_custs());
+		}
+		catch (SQLException e)
+		{
+			fail();
+		}
+	}
+	
+	@Test
 	public void testGetOrders()
 	{
 		try
@@ -72,6 +98,21 @@ public class DBConnect_Test
 			fail();
 		}
 	}
+	
+	@Test
+	public void testsetstatus()
+	{
+		try
+		{
+			Assert.assertNotNull(DBConnect.setStatus(0, ""));
+		}
+		catch(SQLException e)
+		{
+			fail();
+		}
+		
+	}
+
 
 	@Test
 	public void testGetArticles()
