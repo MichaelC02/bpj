@@ -119,7 +119,7 @@ public class DBConnect_Test
 	{
 		try
 		{
-			Order o = new Order(1, null, null, null, 0, 0, null);
+			Order o = new Order(1, null, "", "", 0, 0, "");
 			Assert.assertNotNull(DBConnect.GetArticles(o));
 		}
 		catch(SQLException e)
